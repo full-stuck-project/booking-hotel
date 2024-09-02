@@ -14,15 +14,32 @@ export const SignUp = () => {
     email: "",
     phone: "",
     password: "",
+    confirmPassword: "",
     role: "",
   });
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  function handleUserCreate() {}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log("Changed field:", name);
+    console.log("New value:", value);
 
-  const handleRoleChange = (event) => {
-    setSelectedRole(event.target.value);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    console.log(formData);
+  }
+
+  // const handleRoleChange = (event) => {
+  //   setSelectedRole(event.target.value);
+  //   console.log(formData.role);
+  // };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -51,6 +68,7 @@ export const SignUp = () => {
       }`}
     >
       <form
+        onSubmit={handleSubmit}
         className={` p-8 rounded-lg shadow-lg w-full max-w-md relative ${
           isDarkMode ? "bg-gray-800" : "bg-white"
         }`}
@@ -96,6 +114,8 @@ export const SignUp = () => {
           type="text"
           placeholder="First Name"
           name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
           className={`border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${
             isDarkMode ? "bg-gray-700 text-gray-200" : "bg-white text-gray-900"
           }`}
@@ -103,6 +123,8 @@ export const SignUp = () => {
         <input
           type="text"
           placeholder="Last Name"
+          onChange={handleChange}
+          value={formData.lastName}
           name="lastName"
           className={`border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${
             isDarkMode ? "bg-gray-700 text-gray-200" : "bg-white text-gray-900"
@@ -111,6 +133,8 @@ export const SignUp = () => {
         <input
           type="email"
           placeholder="Email"
+          onChange={handleChange}
+          value={formData.email}
           name="email"
           className={`border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${
             isDarkMode ? "bg-gray-700 text-gray-200" : "bg-white text-gray-900"
@@ -119,6 +143,8 @@ export const SignUp = () => {
         <input
           type="tel"
           placeholder="Phone"
+          onChange={handleChange}
+          value={formData.phone}
           name="phone"
           className={`border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${
             isDarkMode ? "bg-gray-700 text-gray-200" : "bg-white text-gray-900"
@@ -128,7 +154,42 @@ export const SignUp = () => {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
+            onChange={handleChange}
+            value={formData.password}
             name="password"
+            className={`border border-gray-300 rounded-md p-3 w-full pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              isDarkMode
+                ? "bg-gray-700 text-gray-200"
+                : "bg-white text-gray-900"
+            }`}
+          />
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+          >
+            {showPassword ? (
+              <EyeSlashIcon
+                className={`w-5 h-5 ${
+                  isDarkMode ? "text-gray-400" : "text-gray-500"
+                }`}
+              />
+            ) : (
+              <EyeIcon
+                className={`w-5 h-5 ${
+                  isDarkMode ? "text-gray-400" : "text-gray-500"
+                }`}
+              />
+            )}
+          </button>
+        </div>
+        <div className="relative mb-4">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            onChange={handleChange}
+            value={formData.confirmPassword}
+            name="confirmPassword"
             className={`border border-gray-300 rounded-md p-3 w-full pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
               isDarkMode
                 ? "bg-gray-700 text-gray-200"
@@ -159,8 +220,8 @@ export const SignUp = () => {
         <div className="relative mb-4">
           <select
             name="role"
-            value={selectedRole}
-            onChange={handleRoleChange}
+            value={formData.role}
+            onChange={handleChange}
             onMouseEnter={() =>
               handleMouseEnter(selectedRole === "1" ? "Personal" : "Business")
             }
