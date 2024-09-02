@@ -4,10 +4,30 @@ import { Link } from "react-router-dom";
 
 export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log("Changed field:", name);
+    console.log("New value:", value);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(formData);
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -18,19 +38,22 @@ export const SignIn = () => {
         <p className="text-gray-600 text-center mb-6">
           Sign in and start planning your dream vacation today!
         </p>
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
             <input
               type="email"
+              name="email"
               placeholder="Email"
+              onChange={handleChange}
               className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
-              placeholder="Password"
               name="password"
+              placeholder="Password"
+              onChange={handleChange}
               className="border border-gray-300 rounded-md p-3 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
@@ -54,7 +77,7 @@ export const SignIn = () => {
           <Link to="/signup" className="text-blue-500 hover:underline">
             Create an Account
           </Link>
-        </div>
+        </form>
       </div>
     </div>
   );
