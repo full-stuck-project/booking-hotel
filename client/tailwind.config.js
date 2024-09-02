@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class", // Enable dark mode
+  darkMode: "class",
   content: ["/index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -10,21 +10,19 @@ export default {
         black: "#000000",
         lightGray: "#F2F2F1",
         lightMode: {
-          divLight: "#FFFFFF",
-          h1Light: "#4A4A4A",
-          btnLight: "#FB8C00",
-          btnText: "#FFFFFF",
-          btnHover: "#F57C00",
+          div: "#FFFFFF",
+          divText: "##000000",
+          h1: "#000000",
+          input: "#FFFFFF",
+          inputText: "#000000",
+
         },
         darkMode: {
-          divDark: "#000000",
-          h1Dark: "#FF5722",
-          input: "#000000",
+          div: "#1F2937",
+          divText: "#FFFFFF",
+          h1: "#FFFFFF",
+          input: "#374151",
           inputText: "#FFFFFF",
-          btnDark: "#FB8C00",
-          bgText: "#FFFFFF",
-          btnHover: "#F57C00",
-          seactionDark: "text-white",
         },
       },
     },

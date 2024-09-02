@@ -2,31 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hide default navigation arrows */
-
-/* Light mode by default */
-body {
-  @apply bg-lightMode-divLight text-lightMode-h1Light;
+/* lightmode */
+.div {
+  @apply bg-lightMode-div text-lightMode-divText;
 }
 
-/* Dark mode styles */
-.dark {
-  body {
-    @apply bg-darkMode-divDark text-darkMode-bgText;
-  }
-  h1 {
-    @apply text-darkMode-h1Dark;
-  }
-  input {
-    @apply bg-darkMode-input text-darkMode-inputText;
-  }
-  .btn {
-    @apply bg-darkMode-btnDark;
-  }
-  .btn:hover {
-    @apply bg-darkMode-btnHover; /* Ensure this class exists */
-  }
-  .dark .sectionDark {
-    @apply text-white;
-  }
+.h1 {
+  @apply text-lightMode-h1;
 }
+
+.input {
+  @apply bg-lightMode-input text-lightMode-inputText;
+}
+
+/* darkmode */
+
+.dark .div {
+  @apply bg-darkMode-div text-darkMode-divText;
+}
+
+.dark .h1 {
+  @apply text-darkMode-h1;
+}
+
+.dark .input {
+  @apply bg-darkMode-input text-darkMode-inputText;
+}
+
+/* .dark .btn {
+  @apply bg-darkMode-btnDark;
+}
+
+.dark .btn:hover {
+  @apply bg-darkMode-btnHover;
+}
+
+.dark .sectionDark {
+  @apply text-white;
+} */
