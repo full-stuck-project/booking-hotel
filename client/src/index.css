@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hide default navigation arrows */
+
+/* Light mode by default */
+body {
+  @apply bg-lightMode-divLight text-lightMode-h1Light;
+}
+
+/* Dark mode styles */
+.dark {
+  body {
+    @apply bg-darkMode-divDark text-darkMode-bgText;
+  }
+  h1 {
+    @apply text-darkMode-h1Dark;
+  }
+  input {
+    @apply bg-darkMode-input text-darkMode-inputText;
+  }
+  .btn {
+    @apply bg-darkMode-btnDark;
+  }
+  .btn:hover {
+    @apply bg-darkMode-btnHover; /* Ensure this class exists */
+  }
+  .dark .sectionDark {
+    @apply text-white;
+  }
+}
