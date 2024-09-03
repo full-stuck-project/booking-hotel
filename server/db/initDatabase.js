@@ -23,6 +23,7 @@ const initializeDatabase = async () => {
         password VARCHAR(255) NOT NULL,
         refresh_token VARCHAR(255),
         reset_token VARCHAR(255),
+        reset_token_expires_at DATETIME,
         access_token VARCHAR(255),
         FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL
       )`,
