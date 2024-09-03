@@ -1,7 +1,7 @@
 // import React, { useState, useEffect } from "react";
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 
-// export const SearchFilter = () => {
+// export const SearchFilter = ({ className = "" }) => {
 //   const [countries, setCountries] = useState([]);
 //   const [filteredCountries, setFilteredCountries] = useState([]);
 //   const [country, setCountry] = useState("");
@@ -13,7 +13,6 @@
 //   const [hidden, setHidden] = useState(true);
 
 //   useEffect(() => {
-//     // Fetch country data from REST Countries API
 //     fetch("https://restcountries.com/v3.1/all")
 //       .then((response) => response.json())
 //       .then((data) => {
@@ -29,11 +28,8 @@
 //       });
 //   }, []);
 
-//   function showDetails() {
-//     setHidden(!hidden);
-//   }
+//   const showDetails = () => setHidden(!hidden);
 
-//   // Filter countries based on input
 //   const handleCountryChange = (input) => {
 //     const filtered = countries.filter((country) =>
 //       country.label.toLowerCase().startsWith(input.toLowerCase())
@@ -42,181 +38,181 @@
 //     setFilteredCountries(filtered);
 //   };
 
-//   function handleIncreaseAdult() {
-//     setAdult((prevAdult) => prevAdult + 1);
-//   }
-//   function handleDecreaseAdult() {
-//     setAdult((prevAdult) => {
-//       if (prevAdult > 0) {
-//         return prevAdult - 1;
-//       } else {
-//         alert("Can't go below 0");
-//         return prevAdult;
-//       }
-//     });
-//   }
-//   function handleIncreaseChildren() {
-//     setChildren((prevChildren) => prevChildren + 1);
-//   }
-//   function handleDecreaseChildren() {
-//     setChildren((prevChildren) => {
-//       if (prevChildren > 0) {
-//         return prevChildren - 1;
-//       } else {
-//         alert("Can't go below 0");
-//         return prevChildren;
-//       }
-//     });
-//   }
-//   function handleIncreaseRoom() {
-//     setRoom((prevRoom) => prevRoom + 1);
-//   }
+//   const handleIncreaseAdult = () => setAdult((prevAdult) => prevAdult + 1);
+//   const handleDecreaseAdult = () =>
+//     setAdult((prevAdult) => (prevAdult > 1 ? prevAdult - 1 : prevAdult));
 
-//   function handleDecreaseRoom() {
-//     setRoom((prevRoom) => {
-//       if (prevRoom > 0) {
-//         return prevRoom - 1;
-//       } else {
-//         alert("Can't go below 0");
-//         return prevRoom;
-//       }
-//     });
-//   }
+//   const handleIncreaseChildren = () =>
+//     setChildren((prevChildren) => prevChildren + 1);
+//   const handleDecreaseChildren = () =>
+//     setChildren((prevChildren) =>
+//       prevChildren > 0 ? prevChildren - 1 : prevChildren
+//     );
+
+//   const handleIncreaseRoom = () => setRoom((prevRoom) => prevRoom + 1);
+//   const handleDecreaseRoom = () =>
+//     setRoom((prevRoom) => (prevRoom > 0 ? prevRoom - 1 : prevRoom));
 
 //   return (
-//     <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-xl mx-auto">
-//       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+//     <div
+//       className={`flex flex-col p-4 bg-white rounded-lg shadow-md ${className}`}
+//     >
+//       <h2 className="text-4xl font-semibold text-black text-center mb-2">
 //         Hotel Search
 //       </h2>
-//       <div className="flex flex-col gap-6">
+//       <strong className="text-center text-black mb-6 text-2xl">
+//         Order your dream vacation now!
+//       </strong>
+//       <div className="flex gap-4">
 //         {/* Country Input */}
-//         <div className="relative">
+//         <div className="relative flex-1">
 //           <input
 //             type="text"
-//             className="bg-gray-100 text-gray-800 w-full h-[50px] pl-12 pr-4 border rounded-lg border-gray-300 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
+//             style={{ height: "50px" }}
+//             className="bg-gray-100 text-gray-800 w-full pl-12 pr-4 border rounded-lg border-gray-300 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
 //             placeholder="Enter country"
 //             value={country}
 //             onChange={(e) => handleCountryChange(e.target.value)}
 //           />
-//           <i className="fas fa-globe-americas absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-xl"></i>
+//           <i className="fas fa-globe-americas absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-lg"></i>
 //         </div>
-//         <div className="flex flex-col sm:flex-row gap-4">
-//           {/* Check-In Date */}
-//           <div className="relative flex-1">
-//             <input
-//               type="date"
-//               className="bg-gray-100 text-gray-800 h-[50px] w-full border rounded-lg border-gray-300 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
-//               placeholder="Check-In Date"
-//               value={checkInDate}
-//               onChange={(e) => setCheckInDate(e.target.value)}
-//             />
-//             <i className="fas fa-calendar-day absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-xl"></i>
-//           </div>
-//           {/* Check-Out Date */}
-//           <div className="relative flex-1">
-//             <input
-//               type="date"
-//               className="bg-gray-100 text-gray-800 h-[50px] w-full border rounded-lg border-gray-300 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
-//               placeholder="Check-Out Date"
-//               value={checkOutDate}
-//               onChange={(e) => setCheckOutDate(e.target.value)}
-//             />
-//             <i className="fas fa-calendar-day absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-xl"></i>
-//           </div>
-//         </div>
-//         <div>
-//           <i className="fas fa-user text-gray-600 text-xl absolute mt-6 ml-2"></i>
 
-//           <button
-//             className="bg-gray-100 p-[10px] w-[50%] border-[2px] rounded-lg mt-3"
-//             onClick={showDetails}
-//           >
-//             {adult} Adult {children} Children {room} Room
-//           </button>
-//           <div
-//             className={`w-[200px] h-[200px] border-[2px] border-gray-300 ${
-//               hidden ? "hidden" : ""
-//             }`}
-//           >
-//             <div className="flex justify-between">
-//               <p>Adult</p>
-//               <div className="mr-5 border-[2px] border-gray-300 w-[100px] text-center ">
-//                 <button
-//                   className="text-[20px] mr-2"
-//                   onClick={handleIncreaseAdult}
-//                 >
-//                   +
-//                 </button>
-//                 <span className="text-[20px] mr-2">{adult}</span>
-//                 <button
-//                   className="text-[20px] mr-2 "
-//                   onClick={handleDecreaseAdult}
-//                 >
-//                   -
-//                 </button>
+//         {/* Check-In Date Input */}
+//         <div className="relative flex-1">
+//           <input
+//             type="date"
+//             style={{ height: "50px" }}
+//             className="bg-gray-100 text-gray-800 w-full pl-12 pr-4 border rounded-lg border-gray-300 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
+//             value={checkInDate}
+//             onChange={(e) => setCheckInDate(e.target.value)}
+//           />
+//           <i className="fas fa-calendar-day absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-lg"></i>
+//         </div>
+
+//         {/* Check-Out Date Input */}
+//         <div className="relative flex-1">
+//           <input
+//             type="date"
+//             style={{ height: "50px" }}
+//             className="bg-gray-100 text-gray-800 w-full pl-12 pr-4 border rounded-lg border-gray-300 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
+//             value={checkOutDate}
+//             onChange={(e) => setCheckOutDate(e.target.value)}
+//           />
+//           <i className="fas fa-calendar-day absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-lg"></i>
+//         </div>
+//       </div>
+
+//       {/* Guest and Room Details */}
+//       <div className="relative mt-4">
+//         <button
+//           className="bg-gray-100 w-full h-[50px] pl-12 pr-4 border rounded-lg border-gray-300 flex items-center justify-between text-gray-800 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
+//           onClick={showDetails}
+//         >
+//           <span className="flex items-center gap-2">
+//             <i className="fas fa-user text-gray-600 text-lg"></i>
+//             {adult} Adult{adult > 1 && "s"}
+//           </span>
+//           <span className="flex items-center gap-2">
+//             <i className="fas fa-child text-gray-600 text-lg"></i>
+//             {children} Child{children !== 1 && "ren"}
+//           </span>
+//           <span className="flex items-center gap-2">
+//             <i className="fas fa-bed text-gray-600 text-lg"></i>
+//             {room} Room{room > 1 && "s"}
+//           </span>
+//         </button>
+//         {!hidden && (
+//           <div className="absolute top-full left-0 w-full mt-2 p-4 border border-gray-300 bg-white rounded-lg shadow-lg z-10">
+//             <div className="flex items-center mb-2">
+//               <i className="fas fa-user text-gray-600 text-lg mr-3"></i>
+//               <div className="flex-grow flex justify-between items-center border border-gray-300 p-2 rounded-lg">
+//                 <p className="text-sm">Adults</p>
+//                 <div className="flex items-center">
+//                   <button
+//                     className="text-xl px-2"
+//                     onClick={handleDecreaseAdult}
+//                   >
+//                     -
+//                   </button>
+//                   <span className="text-lg">{adult}</span>
+//                   <button
+//                     className="text-xl px-2"
+//                     onClick={handleIncreaseAdult}
+//                   >
+//                     +
+//                   </button>
+//                 </div>
 //               </div>
 //             </div>
-//             <div className="flex justify-between">
-//               <p>Children</p>
-//               <div className="mr-5 border-[2px] border-gray-300 w-[100px] text-center">
-//                 <button
-//                   className="text-[20px] mr-2"
-//                   onClick={handleIncreaseChildren}
-//                 >
-//                   +
-//                 </button>
-//                 <span className="text-[20px] mr-2">{children}</span>
-//                 <button
-//                   className="text-[20px] mr-2 "
-//                   onClick={handleDecreaseChildren}
-//                 >
-//                   -
-//                 </button>
+//             <div className="flex items-center mb-2">
+//               <i className="fas fa-child text-gray-600 text-lg mr-3"></i>
+//               <div className="flex-grow flex justify-between items-center border border-gray-300 p-2 rounded-lg">
+//                 <p className="text-sm">Children</p>
+//                 <div className="flex items-center">
+//                   <button
+//                     className="text-xl px-2"
+//                     onClick={handleDecreaseChildren}
+//                   >
+//                     -
+//                   </button>
+//                   <span className="text-lg">{children}</span>
+//                   <button
+//                     className="text-xl px-2"
+//                     onClick={handleIncreaseChildren}
+//                   >
+//                     +
+//                   </button>
+//                 </div>
 //               </div>
 //             </div>
-//             <div className=" flex justify-between">
-//               <p>Rooms</p>
-//               <div className="mr-5 border-[2px] border-gray-300 w-[100px] text-center">
-//                 <button
-//                   className="text-[20px] mr-2"
-//                   onClick={handleIncreaseRoom}
-//                 >
-//                   +
-//                 </button>
-//                 <span className="text-[20px] mr-2">{room}</span>
-//                 <button
-//                   className="text-[20px] mr-2 "
-//                   onClick={handleDecreaseRoom}
-//                 >
-//                   -
-//                 </button>
+//             <div className="flex items-center">
+//               <i className="fas fa-bed text-gray-600 text-lg mr-3"></i>
+//               <div className="flex-grow flex justify-between items-center border border-gray-300 p-2 rounded-lg">
+//                 <p className="text-sm">Rooms</p>
+//                 <div className="flex items-center">
+//                   <button className="text-xl px-2" onClick={handleDecreaseRoom}>
+//                     -
+//                   </button>
+//                   <span className="text-lg">{room}</span>
+//                   <button className="text-xl px-2" onClick={handleIncreaseRoom}>
+//                     +
+//                   </button>
+//                 </div>
 //               </div>
 //             </div>
 //           </div>
-//         </div>
-//         {/* Search Button */}
-//         <div className="flex justify-center">
-//           <button className="bg-orange-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition duration-300 ease-in-out">
-//             Search
-//           </button>
-//         </div>
+//         )}
+//       </div>
+
+//       {/* Search Button */}
+//       <div className="flex items-center justify-center mt-4">
+//         <button className="bg-orange-500 text-white h-[50px] px-6 rounded-lg shadow-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition duration-300 ease-in-out">
+//           Search
+//         </button>
 //       </div>
 //     </div>
 //   );
 // };
+
 import React, { useState, useEffect } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-export const SearchFilter = () => {
+export const SearchFilter = ({ className = "" }) => {
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [country, setCountry] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkOutDate, setCheckOutDate] = useState("");
   const [adult, setAdult] = useState(1);
   const [children, setChildren] = useState(0);
   const [room, setRoom] = useState(1);
   const [hidden, setHidden] = useState(true);
+  const [formData, setFormData] = useState({
+    country: "",
+    startDate: "",
+    endDate: "",
+    adults: 1,
+    children: 0,
+    rooms: 1,
+  });
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -240,134 +236,233 @@ export const SearchFilter = () => {
     const filtered = countries.filter((country) =>
       country.label.toLowerCase().startsWith(input.toLowerCase())
     );
-    setCountry(input);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      country: input,
+    }));
     setFilteredCountries(filtered);
   };
 
-  const handleIncreaseAdult = () => setAdult((prevAdult) => prevAdult + 1);
-  const handleDecreaseAdult = () =>
-    setAdult((prevAdult) => (prevAdult > 0 ? prevAdult - 1 : prevAdult));
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
-  const handleIncreaseChildren = () =>
-    setChildren((prevChildren) => prevChildren + 1);
-  const handleDecreaseChildren = () =>
-    setChildren((prevChildren) =>
-      prevChildren > 0 ? prevChildren - 1 : prevChildren
-    );
+  const handleIncreaseAdult = () => {
+    setAdult((prevAdult) => {
+      const newAdult = prevAdult + 1;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        adults: newAdult,
+      }));
+      return newAdult;
+    });
+  };
 
-  const handleIncreaseRoom = () => setRoom((prevRoom) => prevRoom + 1);
-  const handleDecreaseRoom = () =>
-    setRoom((prevRoom) => (prevRoom > 0 ? prevRoom - 1 : prevRoom));
+  const handleDecreaseAdult = () => {
+    setAdult((prevAdult) => {
+      const newAdult = prevAdult > 1 ? prevAdult - 1 : prevAdult;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        adults: newAdult,
+      }));
+      return newAdult;
+    });
+  };
+
+  const handleIncreaseChildren = () => {
+    setChildren((prevChildren) => {
+      const newChildren = prevChildren + 1;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        children: newChildren,
+      }));
+      return newChildren;
+    });
+  };
+
+  const handleDecreaseChildren = () => {
+    setChildren((prevChildren) => {
+      const newChildren = prevChildren > 0 ? prevChildren - 1 : prevChildren;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        children: newChildren,
+      }));
+      return newChildren;
+    });
+  };
+
+  const handleIncreaseRoom = () => {
+    setRoom((prevRoom) => {
+      const newRoom = prevRoom + 1;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        rooms: newRoom,
+      }));
+      return newRoom;
+    });
+  };
+
+  const handleDecreaseRoom = () => {
+    setRoom((prevRoom) => {
+      const newRoom = prevRoom > 0 ? prevRoom - 1 : prevRoom;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        rooms: newRoom,
+      }));
+      return newRoom;
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission, such as sending formData to a server
+    console.log(formData);
+  };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-[900px] mx-auto">
-      <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+    <form
+      onSubmit={handleSubmit}
+      className={`flex flex-col p-4 bg-white rounded-lg shadow-md ${className}`}
+    >
+      <h2 className="text-4xl font-semibold text-black text-center mb-2">
         Hotel Search
       </h2>
-      <div className="flex flex-col gap-6">
+      <strong className="text-center text-black mb-6 text-2xl">
+        Order your dream vacation now!
+      </strong>
+      <div className="flex gap-4">
         {/* Country Input */}
-        <div className="relative">
+        <div className="relative flex-1">
           <input
             type="text"
-            className="bg-gray-100 text-gray-800 w-full h-[50px] pl-12 pr-4 border rounded-lg border-gray-300 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
+            style={{ height: "50px" }}
+            className="bg-gray-100 text-gray-800 w-full pl-12 pr-4 border rounded-lg border-gray-300 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
             placeholder="Enter country"
-            value={country}
-            onChange={(e) => handleCountryChange(e.target.value)}
+            name="country"
+            value={formData.country}
+            onChange={(e) => {
+              handleInputChange(e);
+              handleCountryChange(e.target.value);
+            }}
           />
-          <i className="fas fa-globe-americas absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-xl"></i>
+          <i className="fas fa-globe-americas absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-lg"></i>
         </div>
 
-        {/* Dates Input */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="relative flex-1">
-            <input
-              type="date"
-              className="bg-gray-100 text-gray-800 h-[50px] w-full border rounded-lg border-gray-300 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
-              placeholder="Check-In Date"
-              value={checkInDate}
-              onChange={(e) => setCheckInDate(e.target.value)}
-            />
-            <i className="fas fa-calendar-day absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-xl"></i>
-          </div>
-          <div className="relative flex-1">
-            <input
-              type="date"
-              className="bg-gray-100 text-gray-800 h-[50px] w-full border rounded-lg border-gray-300 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
-              placeholder="Check-Out Date"
-              value={checkOutDate}
-              onChange={(e) => setCheckOutDate(e.target.value)}
-            />
-            <i className="fas fa-calendar-day absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-xl"></i>
-          </div>
+        {/* Check-In Date Input */}
+        <div className="relative flex-1">
+          <input
+            type="date"
+            style={{ height: "50px" }}
+            className="bg-gray-100 text-gray-800 w-full pl-12 pr-4 border rounded-lg border-gray-300 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
+            name="startDate"
+            value={formData.startDate}
+            onChange={handleInputChange}
+          />
+          <i className="fas fa-calendar-day absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-lg"></i>
         </div>
 
-        {/* Room Details Input */}
-        <div className="relative">
-          <i className="fas fa-user text-gray-600 text-xl absolute mt-6 ml-2"></i>
-          <button
-            className="bg-gray-100 p-[10px] w-full border-[2px] rounded-lg mt-3 flex justify-between items-center"
-            onClick={showDetails}
-          >
-            <span>
-              {adult} Adult{adult > 1 && "s"}
-            </span>
-            <span>
-              {children} Child{children !== 1 && "ren"}
-            </span>
-            <span>
-              {room} Room{room > 1 && "s"}
-            </span>
-          </button>
-          {!hidden && (
-            <div className="absolute w-full p-4 border-[2px] border-gray-300 bg-white rounded-lg shadow-lg mt-2 z-10">
-              <div className="flex justify-between mb-2">
-                <p>Adults</p>
-                <div className="border-[2px] border-gray-300 w-[120px] text-center flex items-center justify-between">
+        {/* Check-Out Date Input */}
+        <div className="relative flex-1">
+          <input
+            type="date"
+            style={{ height: "50px" }}
+            className="bg-gray-100 text-gray-800 w-full pl-12 pr-4 border rounded-lg border-gray-300 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
+            name="endDate"
+            value={formData.endDate}
+            onChange={handleInputChange}
+          />
+          <i className="fas fa-calendar-day absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-lg"></i>
+        </div>
+      </div>
+
+      {/* Guest and Room Details */}
+      <div className="relative mt-4">
+        <button
+          type="button"
+          className="bg-gray-100 w-full h-[50px] pl-12 pr-4 border rounded-lg border-gray-300 flex items-center justify-between text-gray-800 focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out"
+          onClick={showDetails}
+        >
+          <span className="flex items-center gap-2">
+            <i className="fas fa-user text-gray-600 text-lg"></i>
+            {adult} Adult{adult > 1 && "s"}
+          </span>
+          <span className="flex items-center gap-2">
+            <i className="fas fa-child text-gray-600 text-lg"></i>
+            {children} Child{children !== 1 && "ren"}
+          </span>
+          <span className="flex items-center gap-2">
+            <i className="fas fa-bed text-gray-600 text-lg"></i>
+            {room} Room{room > 1 && "s"}
+          </span>
+        </button>
+        {!hidden && (
+          <div className="absolute top-full left-0 w-full mt-2 p-4 border border-gray-300 bg-white rounded-lg shadow-lg z-10">
+            <div className="flex items-center mb-2">
+              <i className="fas fa-user text-gray-600 text-lg mr-3"></i>
+              <div className="flex-grow flex justify-between items-center border border-gray-300 p-2 rounded-lg">
+                <p className="text-sm">Adults</p>
+                <div className="flex items-center">
                   <button
-                    className="text-[20px] px-2"
+                    type="button"
+                    className="text-xl px-2"
                     onClick={handleDecreaseAdult}
                   >
                     -
                   </button>
-                  <span className="text-[20px]">{adult}</span>
+                  <span className="text-lg">{adult}</span>
                   <button
-                    className="text-[20px] px-2"
+                    type="button"
+                    className="text-xl px-2"
                     onClick={handleIncreaseAdult}
                   >
                     +
                   </button>
                 </div>
               </div>
-              <div className="flex justify-between mb-2">
-                <p>Children</p>
-                <div className="border-[2px] border-gray-300 w-[120px] text-center flex items-center justify-between">
+            </div>
+            <div className="flex items-center mb-2">
+              <i className="fas fa-child text-gray-600 text-lg mr-3"></i>
+              <div className="flex-grow flex justify-between items-center border border-gray-300 p-2 rounded-lg">
+                <p className="text-sm">Children</p>
+                <div className="flex items-center">
                   <button
-                    className="text-[20px] px-2"
+                    type="button"
+                    className="text-xl px-2"
                     onClick={handleDecreaseChildren}
                   >
                     -
                   </button>
-                  <span className="text-[20px]">{children}</span>
+                  <span className="text-lg">{children}</span>
                   <button
-                    className="text-[20px] px-2"
+                    type="button"
+                    className="text-xl px-2"
                     onClick={handleIncreaseChildren}
                   >
                     +
                   </button>
                 </div>
               </div>
-              <div className="flex justify-between">
-                <p>Rooms</p>
-                <div className="border-[2px] border-gray-300 w-[120px] text-center flex items-center justify-between">
+            </div>
+            <div className="flex items-center">
+              <i className="fas fa-bed text-gray-600 text-lg mr-3"></i>
+              <div className="flex-grow flex justify-between items-center border border-gray-300 p-2 rounded-lg">
+                <p className="text-sm">Rooms</p>
+                <div className="flex items-center">
                   <button
-                    className="text-[20px] px-2"
+                    type="button"
+                    className="text-xl px-2"
                     onClick={handleDecreaseRoom}
                   >
                     -
                   </button>
-                  <span className="text-[20px]">{room}</span>
+                  <span className="text-lg">{room}</span>
                   <button
-                    className="text-[20px] px-2"
+                    type="button"
+                    className="text-xl px-2"
                     onClick={handleIncreaseRoom}
                   >
                     +
@@ -375,16 +470,16 @@ export const SearchFilter = () => {
                 </div>
               </div>
             </div>
-          )}
-        </div>
-
-        {/* Search Button */}
-        <div className="flex justify-center">
-          <button className="bg-orange-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition duration-300 ease-in-out">
-            Search
-          </button>
-        </div>
+          </div>
+        )}
       </div>
-    </div>
+
+      <button
+        type="submit"
+        className="mt-6 w-[20%] bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg focus:outline-none transition duration-300 ease-in-out"
+      >
+        Search Hotels
+      </button>
+    </form>
   );
 };

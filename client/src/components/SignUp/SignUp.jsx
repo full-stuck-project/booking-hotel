@@ -261,7 +261,7 @@ export const SignUp = () => {
             </span>
           )}
         </div>
-        <Link to="/" className="text-blue-500 hover:underline">
+        <Link to="/signin" className="text-blue-500 hover:underline">
           have already account ?
         </Link>
 
