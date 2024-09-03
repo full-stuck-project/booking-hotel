@@ -79,7 +79,7 @@ export const Home = () => {
             ))}
           </Slide>
         </div>
-        <div className="absolute top-[25%] left-0 w-full flex items-center justify-center z-10 px-4">
+        <div className="absolute top-[22%] left-0 w-full flex items-center justify-center z-10 px-4">
           <SearchFilter className="w-[80%] p-24 bg-white bg-opacity-40 border border-gray-300 rounded-lg shadow-lg transform transition duration-500 hover:scale-105" />
         </div>
         <h1 className="text-center text-2xl font-bold mt-14 mb-4 ">

@@ -1,8 +1,8 @@
-const AccessToken = "M19GRVjaQ7ddSto3VtAMvuAWM2Kh";
+const AccessToken = "B1AsXHGxLAXDEbmKVqF5e4wi9bZw"; // Use your valid access token
 
-const fetchHotels = async (keyword) => {
+const fetchHotelsByCity = async (cityCode) => {
   try {
-    const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels?keyword=${keyword}`;
+    const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}`;
     console.log(`Fetching data from URL: ${url}`);
 
     const response = await fetch(url, {
@@ -13,7 +13,6 @@ const fetchHotels = async (keyword) => {
       },
     });
 
-    // Log response status and headers
     console.log(`Response Status: ${response.status}`);
     console.log(`Content-Type: ${response.headers.get("Content-Type")}`);
 
@@ -33,6 +32,6 @@ const fetchHotels = async (keyword) => {
 };
 
 // Usage
-fetchHotels("Paris").then((data) => {
+fetchHotelsByCity("PAR").then((data) => {
   console.log("Hotel Data:", data);
 });
