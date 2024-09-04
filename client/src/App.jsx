@@ -14,6 +14,7 @@ import { Blog } from "./pages/Blog/Blog";
 function App() {
   return (
     <div>
+      <NavBar />
       <Routes>
         <Route path="/blog" element={<Blog />} />
         <Route path="/cards" element={<HotelCard />} />
