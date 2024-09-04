@@ -3,27 +3,39 @@ const getNewAccessToken = async () => {
   const client_secret = "QR06nrh3yytgYfth";
   const tokenUrl = "https://test.api.amadeus.com/v1/security/oauth2/token";
 
-  const response = await fetch(tokenUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams({
-      grant_type: "client_credentials",
-      client_id,
-      client_secret,
-    }),
-  });
+  try {
+    const response = await fetch(tokenUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        grant_type: "client_credentials",
+        client_id,
+        client_secret,
+      }),
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to obtain access token");
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error(`Error response: ${errorBody}`);
+      throw new Error("Failed to obtain access token");
+    }
+
+    const data = await response.json();
+    console.log("Access Token Data:", data);
+    return data.access_token;
+  } catch (error) {
+    console.error("Error obtaining access token:", error);
+    throw error;
   }
-
-  const data = await response.json();
-  return data.access_token;
 };
 
-getNewAccessToken().then((token) => {
-  console.log("New Access Token:", token);
-  // You can use this token for further requests
-});
+getNewAccessToken()
+  .then((token) => {
+    console.log("New Access Token:", token);
+    // Use this token for further requests
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });

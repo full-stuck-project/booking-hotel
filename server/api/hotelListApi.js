@@ -1,4 +1,4 @@
-const AccessToken = "B1AsXHGxLAXDEbmKVqF5e4wi9bZw"; // Use your valid access token
+const AccessToken = "zWDg2yv7Uq3whI7VCeRR0W8eGUZQ"; // Use your valid access token
 
 const fetchHotelsByCity = async (cityCode) => {
   try {
