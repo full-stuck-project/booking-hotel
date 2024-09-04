@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,7 @@ import axios from "axios";
 export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [tooltip, setTooltip] = useState("");
-  // const { isDarkMode } = useSelector((state) => state.user);
+  const { isDarkMode } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -17,7 +17,6 @@ export const SignUp = () => {
     confirmPassword: "",
     role: "",
   });
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,19 +74,6 @@ export const SignUp = () => {
         onSubmit={handleSubmit}
         className={`div p-8 rounded-lg shadow-lg w-full max-w-md relative`}
       >
-        <div className="absolute top-4 right-4 flex items-center space-x-2">
-          <span className={`text-sm`}>Light</span>
-          <button
-            type="button"
-            onClick={toggleDarkMode}
-            className={`w-10 h-6 flex items-center rounded-full`}
-          >
-            <div
-              className={`w-6 h-6 rounded-full transform transition-transform duration-300`}
-            ></div>
-          </button>
-          <span className={`text-sm`}>Dark</span>
-        </div>
         <h1 className={`h1 text-3xl font-semibold mb-6 text-center`}>
           Create an Account
         </h1>
