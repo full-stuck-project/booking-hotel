@@ -545,59 +545,41 @@
 
 import React, { useState, useEffect } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import axios from "axios";
 
-// Replace with your actual access token
-const AccessToken = " C7i5roQT9GzpIvVGbkSehLRE9a1j";
+const AccessToken = "s4sRujG0UcVrPHmFTmMUxG5JnYXT";
 
-// Function to fetch city codes based on the country selected (dummy example)
-const fetchCityCodes = async (countryCode) => {
-  // Replace this with actual implementation to fetch city codes
-  // This could be a predefined list or another API call
-  return ["NCE", "PAR"]; // Example city codes for demonstration
-};
-
-const fetchHotelsByCity = async (
-  cityCode,
-  radius = 5,
-  radiusUnit = "KM",
-  amenities = ["WI-FI_IN_ROOM"],
-  hotelSource = "ALL"
-) => {
-  // Convert amenities array to comma-separated string
-  const amenitiesParam = amenities.join(",");
-
-  // Construct the URL
-  const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=${radius}&radiusUnit=${radiusUnit}&amenities=${amenitiesParam}&hotelSource=${hotelSource}`;
-
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${AccessToken}`,
-      "Content-Type": "application/json",
-    },
-  };
+// New API endpoint
+const fetchHotelsByCity = async (cityCode, radius, radiusUnit) => {
+  const url = `https://new.api.example.com/hotels/search`;
+  const params = new URLSearchParams({
+    cityCode,
+    radius,
+    radiusUnit,
+    hotelSource: "ALL",
+  });
 
   try {
-    const response = await fetch(url, options);
-    console.log(response);
+    const response = await axios.get(`${url}?${params}`, {
+      headers: {
+        Authorization: `Bearer ${AccessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-    if (!response.ok) {
-      const errorBody = await response.text();
-      console.error(`API error: ${errorBody}`);
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
-    const data = await response.json();
-    return data.data;
+    return response.data.hotels; // Assuming the API returns hotels in the `hotels` field
   } catch (error) {
     console.error("Error fetching hotel data:", error);
     return [];
   }
 };
 
-// Example usage
-fetchHotelsByCity("PAR", 5, "KM", ["WI-FI_IN_ROOM"], "ALL").then((data) => {
-  console.log("Hotels data:", data);
-});
+// Replace with actual implementation
+const fetchCityCodes = async (country) => {
+  // Implement this function to fetch city codes based on the country
+  // For now, returning a dummy array of city codes
+  return ["NYC", "LAX"];
+};
 
 export const SearchFilter = ({ className = "" }) => {
   const [countries, setCountries] = useState([]);
@@ -657,17 +639,15 @@ export const SearchFilter = ({ className = "" }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Fetch city codes based on selected country
     const cityCodes = await fetchCityCodes(formData.country);
 
-    // Fetch hotels for each city code
     const hotelPromises = cityCodes.map((cityCode) =>
       fetchHotelsByCity(cityCode, 5, "KM")
     );
     const hotelResults = await Promise.all(hotelPromises);
-    const allHotels = hotelResults.flat(); // Combine results if necessary
+    const allHotels = hotelResults.flat();
 
-    setHotels(allHotels); // Save to state or handle as needed
+    setHotels(allHotels);
     console.log("List of Hotels:", allHotels);
   };
 
@@ -822,12 +802,31 @@ export const SearchFilter = ({ className = "" }) => {
         )}
       </div>
 
-      <button
-        type="submit"
-        className="mt-4 bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 focus:outline-none"
-      >
-        Search Hotels
-      </button>
+      <div className="flex justify-center mt-6">
+        <button
+          type="submit"
+          className="bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 transition duration-300 ease-in-out"
+        >
+          Search
+        </button>
+      </div>
+
+      {hotels.length > 0 && (
+        <div className="mt-6">
+          <h3 className="text-xl font-semibold text-black mb-2">
+            Hotel Results
+          </h3>
+          <ul>
+            {hotels.map((hotel) => (
+              <li key={hotel.id} className="mb-4 border-b border-gray-200 pb-2">
+                <h4 className="text-lg font-bold">{hotel.name}</h4>
+                <p>{hotel.address}</p>
+                <p className="text-gray-600">{hotel.rating} Stars</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </form>
   );
 };

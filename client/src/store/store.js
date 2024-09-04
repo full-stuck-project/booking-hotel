@@ -1,5 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import userIcon from "../assets/images/user-guest.jpg";
+import userIcon from "../../public/img/profilpic.jpg";
 
 const initialState = {
   token: "",

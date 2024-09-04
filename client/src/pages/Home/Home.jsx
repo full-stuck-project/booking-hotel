@@ -4,6 +4,7 @@ import "react-slideshow-image/dist/styles.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { SearchFilter } from "../../components/Fillters/SearchFillter/SearchFillter";
 import { Footer } from "../../components/Footer/Footer";
+import Navbar from "../../components/Navbar/NavBar";
 
 export const Home = () => {
   const slideImages = [
@@ -59,6 +60,7 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <Navbar />
       <div className="relative flex flex-col items-center flex-grow">
         <div className="relative w-full overflow-hidden h-[45%]">
           <Slide
