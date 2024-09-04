@@ -5,24 +5,27 @@ export default {
   theme: {
     extend: {
       colors: {
+        bg: "#FFFFFF",
         primary: "#FD6D3B",
         secondary: "#FFFFFF",
         black: "#000000",
         lightGray: "#F2F2F1",
         lightMode: {
           div: "#FFFFFF",
-          divText: "##000000",
+          divText: "#000000",
           h1: "#000000",
           input: "#FFFFFF",
           inputText: "#000000",
-
+          href: "#F97316",
         },
         darkMode: {
+          bg: "#505050",
           div: "#1F2937",
           divText: "#FFFFFF",
           h1: "#FFFFFF",
           input: "#374151",
           inputText: "#FFFFFF",
+          href: "#FFFFFF",
         },
       },
     },
