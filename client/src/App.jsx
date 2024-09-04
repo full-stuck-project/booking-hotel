@@ -9,10 +9,12 @@ import { SignUp } from "./components/SignUp/SignUp";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SearchFilter } from "./components/Fillters/SearchFillter/SearchFillter";
 import { Footer } from "./components/Footer/Footer";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
     <div>
+    <NavBar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />

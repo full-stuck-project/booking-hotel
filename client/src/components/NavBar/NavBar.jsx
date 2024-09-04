@@ -78,19 +78,19 @@
 // import bell from "../../assets/svg/notification-bell.svg";
 // import profile from "../../assets/svg/profile.svg";
 import React, { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { setIsDarkMode } from "../../store/store";
+
 const NavBar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const { isDark } = useSelector((state) => state.user);
+  const { isDarkMode } = useSelector((state) => state.user);
 
   function toggleDarkMode() {
-    dispatch(setIsDarkMode(!isDark));
+    dispatch(setIsDarkMode(!isDarkMode));
   }
 
   const toggleProfileDropdown = () => setIsProfileOpen(!isProfileOpen);
@@ -99,7 +99,7 @@ const NavBar = () => {
   const toggleLanguageDropdown = () => setIsLanguageOpen(!isLanguageOpen);
 
   return (
-    <nav className="flex items-center justify-between bg-black/20 shadow-black shadow-sm text-6b6a68 h-16 w-full px-6">
+    <nav className="flex items-center justify-between bg-black/20 shadow-black shadow-sm text-6b6a68 h-16 w-full px-6 relative">
       <div className="flex items-center">
         {/* <img src={logo} alt="Logo" className="w-20 h-20 mr-4" /> */}
       </div>
@@ -127,7 +127,7 @@ const NavBar = () => {
           </li>
         </ul>
       </div>
-      <div className="flex items-center space-x-6 text-black">
+      <div className="flex items-center space-x-6">
         {/* Language Dropdown */}
         <div className="relative">
           <button
@@ -162,7 +162,7 @@ const NavBar = () => {
             {/* <img src={bell} alt="Notification Bell" className="h-7" /> */}
           </button>
           {isNotificationOpen && (
-            <div className=" mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
+            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
               <ul>
                 <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                   Notification 1
@@ -177,30 +177,22 @@ const NavBar = () => {
             </div>
           )}
         </div>
-        <div className="absolute top-4 right-4 flex items-center space-x-2">
-          <span
-            className={`text-sm ${isDark ? "text-gray-400" : "text-gray-700"}`}
-          >
-            Light
-          </span>
+
+        {/* Dark Mode Toggle */}
+        <div className="flex items-center space-x-2">
           <button
             type="button"
             onClick={toggleDarkMode}
             className={`w-10 h-6 flex items-center rounded-full ${
-              isDark ? "bg-gray-600" : "bg-gray-300"
+              isDarkMode ? "bg-gray-600" : "bg-gray-300"
             }`}
           >
             <div
               className={`w-6 h-6 rounded-full transform transition-transform duration-300 ${
-                isDark ? "bg-yellow-300 translate-x-4" : "bg-yellow-500"
+                isDarkMode ? "bg-yellow-300 translate-x-4" : "bg-yellow-500"
               }`}
             ></div>
           </button>
-          <span
-            className={`text-sm ${isDark ? "text-gray-400" : "text-gray-700"}`}
-          >
-            Dark
-          </span>
         </div>
 
         {/* Profile Dropdown */}
@@ -214,7 +206,7 @@ const NavBar = () => {
             </div>
           </button>
           {isProfileOpen && (
-            <div className="text-black absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
+            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
               <ul>
                 <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                   Profile
