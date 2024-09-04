@@ -8,10 +8,12 @@ import { RatingFillter } from "./components/Fillters/RatingFillter/RatingFillter
 import { SignUp } from "./components/SignUp/SignUp";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SearchFilter } from "./components/Fillters/SearchFillter/SearchFillter";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
     <Router>
+      <NavBar/>
       <Routes>
         <Route path="/" element={<SearchFilter />} />
         <Route path="/signin" element={<SignIn />} />
