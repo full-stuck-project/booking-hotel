@@ -174,7 +174,7 @@ export const HotelPage = () => {
             <div className="reviews mt-8">
               <h2 className="text-xl font-bold mb-4">Guest Reviews</h2>
               <button
-                className="bg-[#F97316] text-white px-4 py-2 rounded-md"
+                className="btn px-4 py-2 rounded-md"
                 onClick={openReviewPopup}
               >
                 Show All Reviews
