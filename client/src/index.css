@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 /* lightmode */
+
+.bg {
+  @apply bg-lightMode-bg text-lightMode-divText;
+}
+
 .div {
   @apply bg-lightMode-div text-lightMode-divText;
 }
@@ -15,7 +20,14 @@
   @apply bg-lightMode-input text-lightMode-inputText;
 }
 
+.href {
+  @apply hover:text-lightMode-href;
+}
+
 /* darkmode */
+.dark .bg {
+  @apply bg-darkMode-bg text-darkMode-divText;
+}
 
 .dark .div {
   @apply bg-darkMode-div text-darkMode-divText;
@@ -27,6 +39,10 @@
 
 .dark .input {
   @apply bg-darkMode-input text-darkMode-inputText;
+}
+
+.dark .href {
+  @apply hover:text-lightMode-href;
 }
 
 /* .dark .btn {
