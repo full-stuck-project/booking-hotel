@@ -11,12 +11,16 @@ import { SearchFilter } from "./components/Fillters/SearchFillter/SearchFillter"
 import { Footer } from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import { HotelPage } from "./user/pages/HotelPage/HotelPage";
+import { HotelCard } from "./components/HotelCard/HotelCard";
+import { Blog } from "./pages/Blog/Blog";
 
 function App() {
   return (
     <div>
       <NavBar />
       <Routes>
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/cards" element={<HotelCard />} />
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

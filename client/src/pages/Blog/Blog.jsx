@@ -1,3 +1,9 @@
+import { HotelCard } from "../../components/HotelCard/HotelCard";
+
 export const Blog = () => {
-  return <div>Blog</div>;
+  return (
+    <div className="flex flex-col">
+      <HotelCard />
+    </div>
+  );
 };

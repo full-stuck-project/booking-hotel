@@ -12,6 +12,10 @@
   @apply bg-lightMode-div text-lightMode-divText;
 }
 
+.bg {
+  @apply bg-lightMode-div text-lightMode-divText;
+}
+
 .h1 {
   @apply text-lightMode-h1;
 }
@@ -25,6 +29,10 @@
 }
 
 /* darkmode */
+.dark .bg {
+  @apply bg-darkMode-bg text-darkMode-divText;
+}
+
 .dark .bg {
   @apply bg-darkMode-bg text-darkMode-divText;
 }
@@ -51,8 +59,5 @@
 
 .dark .btn:hover {
   @apply bg-darkMode-btnHover;
-}
 
-.dark .sectionDark {
-  @apply text-white;
-} */
+}
