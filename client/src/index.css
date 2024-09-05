@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 /* lightmode */
+
+.bg {
+  @apply bg-lightMode-bg text-lightMode-divText;
+}
+
 .div {
   @apply bg-lightMode-div text-lightMode-divText;
 }
@@ -19,7 +24,19 @@
   @apply bg-lightMode-input text-lightMode-inputText;
 }
 
+.href {
+  @apply hover:text-lightMode-href;
+}
+
+.btn {
+  @apply bg-lightMode-btn text-lightMode-btnText hover:text-lightMode-btnHoverText;
+}
+
+
 /* darkmode */
+.dark .bg {
+  @apply bg-darkMode-bg text-darkMode-divText;
+}
 
 .dark .bg {
   @apply bg-darkMode-bg text-darkMode-divText;
@@ -42,4 +59,8 @@
 
 .dark .href {
   @apply hover:text-lightMode-href hover:border-lightMode-href;
+}
+
+.dark .btn {
+  @apply bg-darkMode-btn text-darkMode-btnText hover:text-darkMode-btnHoverText;
 }

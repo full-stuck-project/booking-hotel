@@ -7,10 +7,14 @@ import { Fillters } from "./components/Fillters/Fillters/Fillters";
 import { RatingFillter } from "./components/Fillters/RatingFillter/RatingFillter";
 import { SignUp } from "./components/SignUp/SignUp";
 import { SignIn } from "./components/SignIn/SignIn";
+import { SearchFilter } from "./components/Fillters/SearchFillter/SearchFillter";
+import { Footer } from "./components/Footer/Footer";
+import NavBar from "./components/NavBar/NavBar";
+import { HotelPage } from "./user/pages/HotelPage/HotelPage";
 import { HotelCard } from "./components/HotelCard/HotelCard";
-import Navbar from "./components/Navbar/NavBar";
-import { Rooms } from "./components/Rooms/Rooms";
-import { OrderConfirmationCard } from "./components/OrderConfirmationCard/OrderConfirmationCard";
+import { Blog } from "./pages/Blog/Blog";
+import { PersonalDetails } from "./user/pages/PersonalDetails/PersonalDetails.JSX";
+
 function App() {
   return (
     <div>
@@ -25,6 +29,9 @@ function App() {
         <Route path="/pricefilter" element={<PriceFillter />} />
         <Route path="/filters" element={<Fillters />} />
         <Route path="/ratingfilter" element={<RatingFillter />} />
+        <Route path="/hotelpage" element={<HotelPage />} />
+        <Route path="/personaldetails" element={<PersonalDetails />} />
+
         {/* <Route path="/footer" element={<Footer />} /> */}
       </Routes>
     </div>
