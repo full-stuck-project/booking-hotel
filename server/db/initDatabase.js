@@ -64,7 +64,7 @@ const initializeDatabase = async () => {
         hotel_id INT NOT NULL,
         room_type INT,
         price DECIMAL(10, 2) NOT NULL,
-        is_occupied BOOLEAN NOT NULL DEFAULT FALSE,
+        is_occupdied BOOLEAN NOT NULL DEFAULT FALSE,
         FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE,
         FOREIGN KEY (room_type) REFERENCES room_types(id) ON DELETE SET NULL
       )`,

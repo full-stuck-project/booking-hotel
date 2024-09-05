@@ -49,13 +49,16 @@
 .dark .h1 {
   @apply text-darkMode-h1;
 }
+.dark .h2 {
+  @apply text-darkMode-h1;
+}
 
 .dark .input {
   @apply bg-darkMode-input text-darkMode-inputText;
 }
 
 .dark .href {
-  @apply hover:text-lightMode-href;
+  @apply hover:text-lightMode-href hover:border-lightMode-href;
 }
 
 .dark .btn {

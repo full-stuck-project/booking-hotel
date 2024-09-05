@@ -209,15 +209,9 @@ const NavBar = () => {
             {isProfileOpen && (
               <div className="div absolute right-0 mt-2 w-48 rounded-lg shadow-lg z-20">
                 <ul>
-                  <li className="href px-4 py-2  cursor-pointer">
-                    Profile
-                  </li>
-                  <li className="href px-4 py-2  cursor-pointer">
-                    Settings
-                  </li>
-                  <li className="href px-4 py-2  cursor-pointer">
-                    Logout
-                  </li>
+                  <li className="href px-4 py-2  cursor-pointer">Profile</li>
+                  <li className="href px-4 py-2  cursor-pointer">Settings</li>
+                  <li className="href px-4 py-2  cursor-pointer">Logout</li>
                 </ul>
               </div>
             )}

@@ -20,11 +20,12 @@ import { TransactionPage } from "./user/pages/TransactionPage/TransactionPage";
 function App() {
   return (
     <div>
-      <NavBar />
+      <Navbar />
       <Routes>
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/cards" element={<HotelCard />} />
         <Route path="/" element={<Home />} />
+        <Route path="/confirm" element={<OrderConfirmationCard />} />
+        <Route path="/rooms" element={<Rooms />} />
+        <Route path="/cards" element={<HotelCard />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/pricefilter" element={<PriceFillter />} />
