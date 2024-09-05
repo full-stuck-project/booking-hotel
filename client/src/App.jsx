@@ -7,18 +7,19 @@ import { Fillters } from "./components/Fillters/Fillters/Fillters";
 import { RatingFillter } from "./components/Fillters/RatingFillter/RatingFillter";
 import { SignUp } from "./components/SignUp/SignUp";
 import { SignIn } from "./components/SignIn/SignIn";
-import { SearchFilter } from "./components/Fillters/SearchFillter/SearchFillter";
-import { Footer } from "./components/Footer/Footer";
 import { HotelCard } from "./components/HotelCard/HotelCard";
-import { Blog } from "./pages/Blog/Blog";
+import Navbar from "./components/Navbar/NavBar";
+import { Rooms } from "./components/Rooms/Rooms";
+import { OrderConfirmationCard } from "./components/OrderConfirmationCard/OrderConfirmationCard";
 function App() {
   return (
     <div>
-      <NavBar />
+      <Navbar />
       <Routes>
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/cards" element={<HotelCard />} />
         <Route path="/" element={<Home />} />
+        <Route path="/confirm" element={<OrderConfirmationCard />} />
+        <Route path="/rooms" element={<Rooms />} />
+        <Route path="/cards" element={<HotelCard />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/pricefilter" element={<PriceFillter />} />

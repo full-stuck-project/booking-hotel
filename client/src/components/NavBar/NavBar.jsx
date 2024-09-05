@@ -80,6 +80,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsDarkMode } from "../../store/store";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -106,7 +107,7 @@ const NavBar = () => {
       <div className="flex-1">
         <ul className="flex justify-center space-x-8">
           <li>
-            <a href="#" className="hover:text-white">
+            <a href="/" className="hover:text-white">
               Home
             </a>
           </li>
