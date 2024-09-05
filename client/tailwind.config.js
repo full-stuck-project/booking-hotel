@@ -11,6 +11,7 @@ export default {
         black: "#000000",
         lightGray: "#F2F2F1",
         lightMode: {
+          bg: "#FFFFFF",
           div: "#FFFFFF",
           divText: "#000000",
           h1: "#000000",
