@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export const PersonalDetails = () => {
+export const PersonalDetailsPage = () => {
   const { isDarkMode } = useSelector((state) => state.user);
 
   // Define initial state for the form fields

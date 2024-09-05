@@ -13,7 +13,9 @@ import NavBar from "./components/NavBar/NavBar";
 import { HotelPage } from "./user/pages/HotelPage/HotelPage";
 import { HotelCard } from "./components/HotelCard/HotelCard";
 import { Blog } from "./pages/Blog/Blog";
-import { PersonalDetails } from "./user/pages/PersonalDetails/PersonalDetails.JSX";
+import { PersonalDetailsPage } from "./user/pages/PersonalDetails/PersonalDetailsPage";
+import { TransactionPage } from "./user/pages/TransactionPage/TransactionPage";
+
 
 function App() {
   return (
@@ -29,7 +31,8 @@ function App() {
         <Route path="/filters" element={<Fillters />} />
         <Route path="/ratingfilter" element={<RatingFillter />} />
         <Route path="/hotelpage" element={<HotelPage />} />
-        <Route path="/personaldetails" element={<PersonalDetails />} />
+        <Route path="/personaldetails" element={<PersonalDetailsPage />} />
+        <Route path="/transactionpage" element={<TransactionPage />} />
 
         {/* <Route path="/footer" element={<Footer />} /> */}
       </Routes>
