@@ -3,7 +3,7 @@ const cors = require("cors");
 const port = process.env.PORT || 5000;
 const app = express();
 const { userRouter } = require("./routes/index.js");
-const initializeDatabase = require("./db/initDatabase");
+// const initializeDatabase = require("./db/initDatabase");
 const createDatabase = require("./db/db.js");
 
 // Middleware
@@ -17,7 +17,7 @@ const startServer = async () => {
   try {
     await createDatabase();
 
-    await initializeDatabase();
+    // await initializeDatabase();
 
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
