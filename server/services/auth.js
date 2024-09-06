@@ -31,13 +31,16 @@ module.exports = {
   login: async (req, res) => {
     try {
       let { email, password } = req.body;
+      console.log(email);
+      console.log(password);
+
 
       const [rows] = await promisePool.query(
         "SELECT * FROM users WHERE email = ?",
         [email]
       );
       let user = rows[0];
-
+      console.log(user)
       if (!user) {
         return res.status(401).json({ err: `email ${email} not found` });
       }
@@ -58,6 +61,7 @@ module.exports = {
 
       res.status(200).json({
         userId: user.id,
+        role: user.role,
         firstName: user.first_name,
         lastName: user.last_name,
         auth: true,
