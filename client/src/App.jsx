@@ -15,12 +15,13 @@ import { HotelCard } from "./components/HotelCard/HotelCard";
 import { Blog } from "./pages/Blog/Blog";
 import { PersonalDetailsPage } from "./user/pages/PersonalDetails/PersonalDetailsPage";
 import { TransactionPage } from "./user/pages/TransactionPage/TransactionPage";
-
+import { OrderConfirmationCard } from "./components/OrderConfirmationCard/OrderConfirmationCard";
+import { Rooms } from "./components/Rooms/Rooms"
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/confirm" element={<OrderConfirmationCard />} />

@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-export const SignUp = () => {
+export const SignUp = ({ onSignInClick }) => {
+  const { isDarkMode } = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
   const [tooltip, setTooltip] = useState("");
-  const { isDarkMode } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -20,9 +19,6 @@ export const SignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("Changed field:", name);
-    console.log("New value:", value);
-
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -60,64 +56,53 @@ export const SignUp = () => {
     setTooltip("");
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   return (
-    <div
-      className={`flex justify-center items-center min-h-screen p-6 ${
-        isDarkMode ? "dark" : ""
-      }`}
-    >
-      <form
-        onSubmit={handleSubmit}
-        className={`div p-8 rounded-lg shadow-lg w-full max-w-md relative`}
-      >
-        <h1 className={`h1 text-3xl font-semibold mb-6 text-center`}>
-          Create an Account
-        </h1>
-
+    <div className={isDarkMode ? "dark" : ""}>
+       <div className="div shadow-md rounded-lg p-8 max-w-md w-full transition-transform transform">
+      <h1 className="text-3xl font-semibold mb-6 text-center">
+        Create an Account
+      </h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           placeholder="First Name"
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
-          className={`input border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          className="input border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
           placeholder="Last Name"
-          onChange={handleChange}
-          value={formData.lastName}
           name="lastName"
-          className={`input border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          value={formData.lastName}
+          onChange={handleChange}
+          className="input border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="email"
           placeholder="Email"
-          onChange={handleChange}
-          value={formData.email}
           name="email"
-          className={`input border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          value={formData.email}
+          onChange={handleChange}
+          className="input border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="tel"
           placeholder="Phone"
-          onChange={handleChange}
-          value={formData.phone}
           name="phone"
-          className={`input border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          value={formData.phone}
+          onChange={handleChange}
+          className="input border border-gray-300 rounded-md p-3 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <div className="relative mb-4">
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
-            onChange={handleChange}
-            value={formData.password}
             name="password"
-            className={`input border border-gray-300 rounded-md p-3 w-full pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            value={formData.password}
+            onChange={handleChange}
+            className="input border border-gray-300 rounded-md p-3 w-full pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="button"
@@ -125,9 +110,9 @@ export const SignUp = () => {
             className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
           >
             {showPassword ? (
-              <EyeSlashIcon className={`w-5 h-5 `} />
+              <EyeSlashIcon className="w-5 h-5" />
             ) : (
-              <EyeIcon className={`w-5 h-5 `} />
+              <EyeIcon className="w-5 h-5" />
             )}
           </button>
         </div>
@@ -135,10 +120,10 @@ export const SignUp = () => {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Confirm Password"
-            onChange={handleChange}
-            value={formData.confirmPassword}
             name="confirmPassword"
-            className={`input border border-gray-300 rounded-md p-3 w-full pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            className="input border border-gray-300 rounded-md p-3 w-full pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="button"
@@ -146,53 +131,49 @@ export const SignUp = () => {
             className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
           >
             {showPassword ? (
-              <EyeSlashIcon className={`w-5 h-5 `} />
+              <EyeSlashIcon className="w-5 h-5" />
             ) : (
-              <EyeIcon className={`w-5 h-5 `} />
+              <EyeIcon className="w-5 h-5" />
             )}
           </button>
         </div>
-
         <div className="relative mb-4">
           <select
             name="role"
             value={formData.role}
             onChange={handleChange}
             onMouseEnter={() =>
-              handleMouseEnter(formData.role == "1" ? "Personal" : "Business")
+              handleMouseEnter(formData.role === "1" ? "Personal" : "Business")
             }
             onMouseLeave={handleMouseLeave}
-            className={`input border border-gray-300 rounded-md p-3 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 `}
+            className="input border border-gray-300 rounded-md p-3 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="1" className={``}>
-              Personal
-            </option>
-            <option value="2" className={``}>
-              Business
-            </option>
+            <option value="1">Personal</option>
+            <option value="2">Business</option>
           </select>
-          {/* Tooltip */}
           {tooltip && (
-            <span
-              className={`absolute left-1/2 transform -translate-x-1/2 -translate-y-full mt-2 w-[220px] text-center rounded-xl p-2 shadow-lg opacity-100 transition-opacity duration-300`}
-            >
+            <span className="absolute left-1/2 transform -translate-x-1/2 -translate-y-full mt-2 w-[220px] text-center rounded-xl p-2 shadow-lg opacity-100 transition-opacity duration-300">
               {tooltip}
-              <span
-                className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full w-4 h-4 rotate-45`}
-              ></span>
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full w-4 h-4 rotate-45"></span>
             </span>
           )}
         </div>
-        <Link to="/signin" className="text-blue-500 hover:underline">
-          have already account ?
-        </Link>
-
         <button
-          className={`bg-orange-500 text-white py-3 px-6 rounded-md hover:bg-orange-700 transition duration-200 w-full max-w-xs mx-auto `}
+          type="submit"
+          className=" btn font-semibold rounded-md p-3 w-full transition duration-300"
         >
           Submit
         </button>
+        <button
+          type="button"
+          onClick={onSignInClick}
+          className="text-blue-500 hover:underline w-full text-center"
+        >
+          Already have an account?
+        </button>
       </form>
     </div>
+    </div>
+   
   );
 };

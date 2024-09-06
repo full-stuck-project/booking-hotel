@@ -77,54 +77,70 @@
 // import globe from "../../assets/svg/globe.svg";
 // import bell from "../../assets/svg/notification-bell.svg";
 // import profile from "../../assets/svg/profile.svg";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsDarkMode } from "../../store/store";
+import { Link } from "react-router-dom";
+import { SignIn } from "../SignIn/SignIn";
+import { SignUp } from "../SignUp/SignUp";
 
 const NavBar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   const dispatch = useDispatch();
-  const { isDarkMode } = useSelector((state) => state.user);
+  const { isDarkMode, token } = useSelector((state) => state.user);
 
-  function toggleDarkMode() {
+  const toggleDarkMode = () => {
     dispatch(setIsDarkMode(!isDarkMode));
-  }
+  };
 
-  const toggleProfileDropdown = () => setIsProfileOpen(!isProfileOpen);
+  const toggleProfileDropdown = () => {
+    if (token) {
+      setIsProfileOpen(!isProfileOpen);
+    } else {
+      setShowSignIn(true);
+    }
+  };
+
   const toggleNotificationDropdown = () =>
     setIsNotificationOpen(!isNotificationOpen);
   const toggleLanguageDropdown = () => setIsLanguageOpen(!isLanguageOpen);
 
+  const handleSignInSuccess = () => {
+    setShowSignIn(false);
+  };
+
   return (
-    <div className={`${isDarkMode ? "dark" : ""}`}>
-      <nav className="flex div items-center justify-between shadow-black shadow-sm text-6b6a68 h-16 w-full px-6 relative">
+    <div className={isDarkMode ? "dark" : ""}>
+      <nav className="div flex items-center justify-between shadow-black shadow-sm text-6b6a68 h-16 w-full px-6 relative">
         <div className="flex items-center">
           {/* <img src={logo} alt="Logo" className="w-20 h-20 mr-4" /> */}
         </div>
         <div className="flex-1">
           <ul className="flex justify-center space-x-8">
             <li>
-              <a href="#" className="href">
+              <Link to="/" className="href">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="href">
+              <Link to="/about" className="href">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="href">
+              <Link to="/services" className="href">
                 Services
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="href">
+              <Link to="/blogs" className="href">
                 Blogs
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -209,15 +225,66 @@ const NavBar = () => {
             {isProfileOpen && (
               <div className="div absolute right-0 mt-2 w-48 rounded-lg shadow-lg z-20">
                 <ul>
-                  <li className="href px-4 py-2  cursor-pointer">Profile</li>
-                  <li className="href px-4 py-2  cursor-pointer">Settings</li>
-                  <li className="href px-4 py-2  cursor-pointer">Logout</li>
+                  <li className="href px-4 py-2 cursor-pointer">Profile</li>
+                  <li className="href px-4 py-2 cursor-pointer">Settings</li>
+                  <li className="href px-4 py-2 cursor-pointer">Logout</li>
                 </ul>
               </div>
             )}
           </div>
         </div>
       </nav>
+
+      {(showSignIn || showSignUp) && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-30 transition-opacity duration-300">
+          <div
+            className={`relative transition-transform duration-300 ${
+              showSignIn ? "transform scale-100" : "transform scale-90"
+            }`}
+          >
+            {showSignIn && (
+              <div className="relative">
+                <SignIn
+                  onSignUpClick={() => {
+                    setShowSignIn(false);
+                    setShowSignUp(true);
+                  }}
+                  onSuccess={handleSignInSuccess}
+                />
+                <button
+                  onClick={() => setShowSignIn(false)}
+                  className="absolute top-4 right-4 text-white text-3xl"
+                >
+                  &times;
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div
+            className={`relative transition-transform duration-300 ${
+              showSignUp ? "transform scale-100" : "transform scale-90"
+            }`}
+          >
+            {showSignUp && (
+              <div className="relative">
+                <SignUp
+                  onSignInClick={() => {
+                    setShowSignUp(false);
+                    setShowSignIn(true);
+                  }}
+                />
+                <button
+                  onClick={() => setShowSignUp(false)}
+                  className="absolute top-4 right-4 text-white text-3xl"
+                >
+                  &times;
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
