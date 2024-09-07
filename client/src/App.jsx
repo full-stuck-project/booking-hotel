@@ -17,6 +17,7 @@ import { PersonalDetailsPage } from "./user/pages/PersonalDetails/PersonalDetail
 import { TransactionPage } from "./user/pages/TransactionPage/TransactionPage";
 import { OrderConfirmationCard } from "./components/OrderConfirmationCard/OrderConfirmationCard";
 import { Rooms } from "./components/Rooms/Rooms"
+import { ExamplePage } from "./pages/ExamplePage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/hotelpage" element={<HotelPage />} />
         <Route path="/personaldetails" element={<PersonalDetailsPage />} />
         <Route path="/transactionpage" element={<TransactionPage />} />
+        <Route path="/examplepage" element={<ExamplePage />} />
 
         {/* <Route path="/footer" element={<Footer />} /> */}
       </Routes>
