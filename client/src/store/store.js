@@ -8,6 +8,7 @@ const initialState = {
   showAuth: false,
   isDarkMode: false,
   profileImage: localStorage.getItem("ProfileImage") || userIcon,
+  searchTerm: "",
 };
 
 const userSlice = createSlice({
@@ -33,6 +34,9 @@ const userSlice = createSlice({
     setIsDarkMode: (state, action) => {
       state.isDarkMode = action.payload;
     },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
   },
 });
 
@@ -43,6 +47,7 @@ export const {
   setToken,
   setFullName,
   setShowAuth,
+  setSearchTerm,
 } = userSlice.actions;
 
 const store = configureStore({

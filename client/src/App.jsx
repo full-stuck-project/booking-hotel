@@ -7,20 +7,24 @@ import { Fillters } from "./components/Fillters/Fillters/Fillters";
 import { RatingFillter } from "./components/Fillters/RatingFillter/RatingFillter";
 import { SignUp } from "./components/SignUp/SignUp";
 import { SignIn } from "./components/SignIn/SignIn";
-import { SearchFilter } from "./components/Fillters/SearchFillter/SearchFillter";
+
 import { Footer } from "./components/Footer/Footer";
-import NavBar from "./components/NavBar/NavBar";
+import NavBar from "./components/Navbar/NavBar";
 import { HotelPage } from "./user/pages/HotelPage/HotelPage";
 import { HotelCard } from "./components/HotelCard/HotelCard";
 import { Blog } from "./pages/Blog/Blog";
 import { PersonalDetails } from "./user/pages/PersonalDetails/PersonalDetails.JSX";
+import { OrderConfirmationCard } from "./components/OrderConfirmationCard/OrderConfirmationCard";
+import { Rooms } from "./components/Rooms/Rooms";
+import { EditHotel } from "./business/components/EditHotel/EditHotel";
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/edithotel" element={<EditHotel />} />
         <Route path="/confirm" element={<OrderConfirmationCard />} />
         <Route path="/rooms" element={<Rooms />} />
         <Route path="/cards" element={<HotelCard />} />

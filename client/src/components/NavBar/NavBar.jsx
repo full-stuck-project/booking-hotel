@@ -1,90 +1,12 @@
-// import React, { useState } from 'react';
-// import logo from '../../assets/logo/logo.png';
-// import globe from '../../assets/svg/globe.svg';
-// import bell from '../../assets/svg/notification-bell.svg';
-// import profile from '../../assets/svg/profile.svg';
-
-// const ProfileDropdown = ({ profile }) => {
-//     const [isOpen, setIsOpen] = useState(false);
-
-//     const dropList = () => {
-//         setIsOpen(!isOpen);
-//     };
-
-//     return (
-//         <div className="relative">
-//             <button onClick={dropList} className="hover:text-gray-200">
-//                 <div className="h-10 w-10 bg-gray-100 rounded-full border-2 border-black flex items-center justify-center">
-//                     <img
-//                         src={profile}
-//                         alt="Profile"
-//                         className="h-7 rounded-full"
-//                     />
-//                 </div>
-//             </button>
-//             {isOpen && (
-//                 <div className="text-black absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
-//                     <ul>
-//                         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-//                             Profile
-//                         </li>
-//                         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-//                             Settings
-//                         </li>
-//                         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-//                             Logout
-//                         </li>
-//                     </ul>
-//                 </div>
-//             )}
-//         </div>
-//     );
-// };
-
-// const NavBar = () => {
-//     return (
-//         <nav className="flex items-center justify-between bg-black/20 shadow-black shadow-sm text-6b6a68 h-16 w-[100%] px-6">
-//             <div className="flex items-center">
-//                 <img src={logo} alt="Logo" className="w-40 h-40 mr-4" />
-//             </div>
-//             <div>
-//                 <ul className="flex space-x-4">
-//                     <li><a href="#" className="hover:text-white">Home</a></li>
-//                     <li><a href="#" className="hover:text-white">About Us</a></li>
-//                     <li><a href="#" className="hover:text-white">Services</a></li>
-//                     <li><a href="#" className="hover:text-white">Blogs</a></li>
-//                 </ul>
-//             </div>
-//             <div className="flex items-center justify-between px-4 py-2 text-white">
-//                 <div className="flex items-center space-x-4">
-//                     <a href="#" className="hover:text-gray-400">
-//                         <img src={globe} alt="Globe" className="h-7" />
-//                     </a>
-//                     <a href="#" className="hover:text-gray-400">
-//                         <img src={bell} alt="Notification Bell" className="h-7" />
-//                     </a>
-//                 </div>
-//                 <div className="ml-3 self-center  flex justify-center bg-black/20 border-solid border-2 border-primary rounded-full  items-center  space-x-4">
-//                     <ProfileDropdown profile={profile} />
-//                 </div>
-//             </div>
-//         </nav>
-//     );
-// };
-
-// export default NavBar;
-// import logo from "../../assets/logo/logo.png";
-// import globe from "../../assets/svg/globe.svg";
-// import bell from "../../assets/svg/notification-bell.svg";
-// import profile from "../../assets/svg/profile.svg";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsDarkMode } from "../../store/store";
-
+import { setIsDarkMode, setSearchTerm } from "../../store/store";
+import { Link } from "react-router-dom";
 const NavBar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   const dispatch = useDispatch();
   const { isDarkMode } = useSelector((state) => state.user);
@@ -92,6 +14,51 @@ const NavBar = () => {
   function toggleDarkMode() {
     dispatch(setIsDarkMode(!isDarkMode));
   }
+  const handleSearchChange = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    setSearch(searchTerm);
+    console.log(searchTerm);
+
+    document.querySelectorAll(".highlight").forEach((el) => {
+      const parent = el.parentNode;
+      parent.innerHTML = parent.innerHTML.replace(
+        /<span class="highlight">(.*?)<\/span>/g,
+        "$1"
+      );
+    });
+
+    if (searchTerm) {
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+
+      let node;
+      let found = false;
+
+      while ((node = walker.nextNode())) {
+        if (node.nodeValue.toLowerCase().includes(searchTerm)) {
+          const parent = node.parentElement;
+          const innerHTML = parent.innerHTML;
+          const highlightedText = innerHTML.replace(
+            new RegExp(`(${searchTerm})`, "gi"),
+            '<span class="highlight">$1</span>'
+          );
+          parent.innerHTML = highlightedText;
+
+          parent.scrollIntoView({ behavior: "instant", block: "start" });
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        console.log("No matches found");
+      }
+    }
+  };
 
   const toggleProfileDropdown = () => setIsProfileOpen(!isProfileOpen);
   const toggleNotificationDropdown = () =>
@@ -102,29 +69,36 @@ const NavBar = () => {
     <div className={`${isDarkMode ? "dark" : ""}`}>
       <nav className="flex div items-center justify-between shadow-black shadow-sm text-6b6a68 h-16 w-full px-6 relative">
         <div className="flex items-center">
-          {/* <img src={logo} alt="Logo" className="w-20 h-20 mr-4" /> */}
+          <img src="/img/logo.jpg" alt="Logo" className="w-20 h-20 mr-4" />
+          <label className="">search : </label>
+          <input
+            className="bg-gray-200 ml-6 bg2 "
+            type="text "
+            value={search}
+            onChange={handleSearchChange}
+          />
         </div>
         <div className="flex-1">
-          <ul className="flex justify-center space-x-8">
+          <ul className="flex justify-center space-x-8 pr-32">
             <li>
-              <a href="#" className="href">
+              <Link to="/" className="href">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="href">
+              <Link to="/about" className="href">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="href">
+              <Link to="/services" className="href">
                 Services
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="href">
+              <Link to="/blogs" className="href">
                 Blogs
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

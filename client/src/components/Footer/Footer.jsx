@@ -71,7 +71,7 @@ export const Footer = () => {
 
         {/* Subscribe Section */}
         <div className="flex flex-col items-center">
-          <h2 className="text-xl font-semibold mb-4">Our Promise</h2>
+          <h2 className="text-xl font-semibold mb-4 searchable">Our Promise</h2>
           <p className="mb-4 text-xl text-center font-['Franklin_Gothic_Medium',_'Arial_Narrow',_Arial,_sans-serif]">
             "Experience luxury and comfort like never before. Let us take care
             of your stay, while you create memories that last a lifetime."
