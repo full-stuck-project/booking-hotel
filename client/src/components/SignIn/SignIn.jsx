@@ -1,22 +1,34 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserType, setToken } from "../../store/store";
 
-export const SignIn = () => {
+export const SignIn = ({ onSignUpClick, onSuccess }) => {
+  const dispatch = useDispatch();
+  const { isDarkMode } = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  // Capitalize the email to lowercase
+  const transformEmail = (email) => {
+    return email.toLowerCase();
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("Changed field:", name);
-    console.log("New value:", value);
+
+    // Transform email to lowercase
+    const transformedValue = name === "email" ? transformEmail(value) : value;
 
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: transformedValue,
     }));
   };
 
@@ -24,20 +36,48 @@ export const SignIn = () => {
     setShowPassword(!showPassword);
   };
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-  }
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/users/login",
+        formData
+      );
+      // Assuming response.data contains the success message and tokens
+      setSuccessMessage(response.data.msg);
+
+      sessionStorage.setItem("roomup-user", response.data.accessToken);
+      sessionStorage.setItem("roomup-user-refresh", response.data.refreshToken);
+
+      dispatch(setUserType(response.data.role));
+      dispatch(setToken(response.data.accessToken));
+      console.log(response.data.accessToken);
+
+      if (onSuccess) onSuccess();
+
+      console.log(response.data);
+    } catch (error) {
+      setErrorMessage(error.response?.data?.err || "An error occurred");
+    }
+  };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full h-[430px]">
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className="div shadow-md rounded-lg p-8 max-w-md w-full h-[430px] transition-transform transform">
         <h1 className="text-3xl font-semibold text-center mb-4">
           Welcome Back!
         </h1>
-        <p className="text-gray-600 text-center mb-6">
+        <p className="h1 text-center mb-6">
           Sign in and start planning your dream vacation today!
         </p>
+        {errorMessage && (
+          <div className="text-red-500 text-center mb-4">{errorMessage}</div>
+        )}
+        {successMessage && (
+          <div className="text-green-500 text-center mb-4">
+            {successMessage}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
             <input
@@ -45,7 +85,8 @@ export const SignIn = () => {
               name="email"
               placeholder="Email"
               onChange={handleChange}
-              className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={formData.email}
+              className="input border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div className="relative">
@@ -54,7 +95,8 @@ export const SignIn = () => {
               name="password"
               placeholder="Password"
               onChange={handleChange}
-              className="border border-gray-300 rounded-md p-3 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={formData.password}
+              className="input border border-gray-300 rounded-md p-3 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="button"
@@ -70,13 +112,17 @@ export const SignIn = () => {
           </div>
           <button
             type="submit"
-            className="bg-orange-500 text-white font-semibold rounded-md p-3 w-full hover:bg-orange-600 transition duration-300"
+            className="btn font-semibold rounded-md p-3 w-full transition duration-300"
           >
             Sign In
           </button>
-          <Link to="/signup" className="text-blue-500 hover:underline">
+          <button
+            type="button"
+            onClick={onSignUpClick}
+            className="text-blue-500 hover:underline w-full text-center"
+          >
             Create an Account
-          </Link>
+          </button>
         </form>
       </div>
     </div>
