@@ -1,10 +1,8 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import axios from "axios";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserType, setToken } from "../../store/store";
-
-
 
 export const SignIn = ({ onSignUpClick, onSuccess }) => {
   const dispatch = useDispatch();
@@ -17,11 +15,20 @@ export const SignIn = ({ onSignUpClick, onSuccess }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  // Capitalize the email to lowercase
+  const transformEmail = (email) => {
+    return email.toLowerCase();
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Transform email to lowercase
+    const transformedValue = name === "email" ? transformEmail(value) : value;
+
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: transformedValue,
     }));
   };
 
@@ -47,7 +54,6 @@ export const SignIn = ({ onSignUpClick, onSuccess }) => {
       console.log(response.data.accessToken);
 
       if (onSuccess) onSuccess();
-
 
       console.log(response.data);
     } catch (error) {
@@ -106,7 +112,7 @@ export const SignIn = ({ onSignUpClick, onSuccess }) => {
           </div>
           <button
             type="submit"
-            className="btn font-semibold rounded-md p-3 w-full  transition duration-300"
+            className="btn font-semibold rounded-md p-3 w-full transition duration-300"
           >
             Sign In
           </button>
