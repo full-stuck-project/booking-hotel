@@ -1,12 +1,12 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-
 import { Home } from "./pages/Home/Home";
 import { PriceFilter } from "./components/Fillters/PriceFillter/PriceFillter";
 import { Fillters } from "./components/Fillters/Fillters/Fillters";
 import { RatingFillter } from "./components/Fillters/RatingFillter/RatingFillter";
 import { SignUp } from "./components/SignUp/SignUp";
 import { SignIn } from "./components/SignIn/SignIn";
+import { SearchFilter } from "./components/Fillters/SearchFillter/SearchFillter";
 import { Footer } from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/NavBar";
 import { HotelPage } from "./user/pages/HotelPage/HotelPage";
@@ -35,7 +35,7 @@ function App() {
         <Route path="/pricefilter" element={<PriceFilter />} />
         <Route path="/filters" element={<Fillters />} />
         <Route path="/ratingfilter" element={<RatingFillter />} />
-        <Route path="/hotelpage" element={<HotelPage />} />
+        <Route path="/hotelpage/:hotelId" element={<HotelPage />} />
         <Route path="/personaldetails" element={<PersonalDetailsPage />} />
         <Route path="/transactionpage" element={<TransactionPage />} />
         <Route path="/examplepage" element={<ExamplePage />} />
