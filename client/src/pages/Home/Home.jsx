@@ -4,6 +4,8 @@ import "react-slideshow-image/dist/styles.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { SearchFilter } from "../../components/Fillters/SearchFillter/SearchFillter";
 import { Footer } from "../../components/Footer/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsDarkMode } from "../../store/store";
 
 export const Home = () => {
   const slideImages = [
@@ -57,69 +59,73 @@ export const Home = () => {
     },
   ];
 
+  const { isDarkMode } = useSelector((state) => state.user);
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="relative flex flex-col items-center flex-grow">
-        <div className="relative w-full overflow-hidden h-[45%]">
-          <Slide
-            className="w-full h-full"
-            autoplay={true}
-            interval={3000}
-            prevArrow={<div style={{ display: "none" }} />}
-            nextArrow={<div style={{ display: "none" }} />}
-          >
-            {slideImages.map((image, index) => (
-              <div className="w-full h-full each-slide relative" key={index}>
+    <div className={`${isDarkMode ? "dark" : ""}`}>
+      <div className="flex flex-col min-h-screen div">
+        <div className="relative flex flex-col items-center flex-grow">
+          <div className="relative w-full overflow-hidden h-[45%]">
+            <Slide
+              className="w-full h-full"
+              autoplay={true}
+              interval={3000}
+              prevArrow={<div style={{ display: "none" }} />}
+              nextArrow={<div style={{ display: "none" }} />}
+            >
+              {slideImages.map((image, index) => (
+                <div className="w-full h-full each-slide relative" key={index}>
+                  <img
+                    src={image}
+                    alt={`Slide ${index + 1}`}
+                    className="w-full h-[75vh] object-cover relative"
+                  />
+                </div>
+              ))}
+            </Slide>
+          </div>
+          <div className="absolute top-[22%] left-0 w-full flex items-center justify-center z-10 px-4">
+            <SearchFilter className="w-[80%] p-24 bg-white bg-opacity-40 border border-gray-300 rounded-lg shadow-lg transform transition duration-500 hover:scale-105" />
+          </div>
+          <h1 className="text-center text-2xl font-bold mt-14 mb-4 ">
+            Explore Top Tourist Destinations
+          </h1>
+          <div className="flex flex-wrap justify-around p-4">
+            {countryImage.map((image, index) => (
+              <div key={index} className="w-[250px] h-[250px] bg-gray-400 mb-4">
                 <img
                   src={image}
-                  alt={`Slide ${index + 1}`}
-                  className="w-full h-[75vh] object-cover relative"
+                  alt={`Destination ${index + 1}`}
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
-          </Slide>
-        </div>
-        <div className="absolute top-[22%] left-0 w-full flex items-center justify-center z-10 px-4">
-          <SearchFilter className="w-[80%] p-24 bg-white bg-opacity-40 border border-gray-300 rounded-lg shadow-lg transform transition duration-500 hover:scale-105" />
-        </div>
-        <h1 className="text-center text-2xl font-bold mt-14 mb-4 ">
-          Explore Top Tourist Destinations
-        </h1>
-        <div className="flex flex-wrap justify-around p-4">
-          {countryImage.map((image, index) => (
-            <div key={index} className="w-[250px] h-[250px] bg-gray-400 mb-4">
-              <img
-                src={image}
-                alt={`Destination ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-        <section id="testimonials" className="w-full py-12 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8">
-              What Our Guests Say
-            </h2>
-            <div className="flex flex-wrap justify-between">
-              {recommendations.map((value, index) => (
-                <div
-                  key={index}
-                  className="h-[150px] w-[200px] bg-gray-100 p-4 rounded-[10px] shadow-md flex flex-col justify-center mb-8 transform transition duration-500 hover:scale-105"
-                >
-                  <strong
-                    className={`text-lg ${value.color} font-semibold mb-2`}
-                  >
-                    {value.name}
-                  </strong>
-                  <p className="text-gray-700">{value.message}</p>
-                </div>
-              ))}
-            </div>
           </div>
-        </section>
+          <section id="testimonials" className="w-full py-12 bg-white div">
+            <div className="container mx-auto px-4 ">
+              <h2 className="text-3xl font-bold text-center mb-8 ">
+                What Our Guests Say
+              </h2>
+              <div className="flex flex-wrap justify-between">
+                {recommendations.map((value, index) => (
+                  <div
+                    key={index}
+                    className="div3 h-[150px] w-[200px] bg-gray-100 p-4 rounded-[10px] shadow-md flex flex-col justify-center mb-8 transform transition duration-500 hover:scale-105"
+                  >
+                    <strong
+                      className={`text-lg ${value.color} font-semibold mb-2`}
+                    >
+                      {value.name}
+                    </strong>
+                    <p className="text-gray-700">{value.message}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };

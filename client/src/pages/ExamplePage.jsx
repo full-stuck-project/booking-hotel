@@ -29,7 +29,7 @@ export const ExamplePage = () => {
           amenities={hotel.hotel_amenities}
           description={`Located in ${hotel.city}, ${hotel.city_center} meters from the center and malls.`}
           rating={`${hotel.rating} Good`}
-          price={100} // Placeholder for the price; update as needed
+          price={hotel.min_price}
         />
       ))}
     </div>

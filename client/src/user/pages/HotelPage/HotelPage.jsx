@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Map from "../../../components/Map/Map";
 
 export const HotelPage = () => {
   const { isDarkMode } = useSelector((state) => state.user);

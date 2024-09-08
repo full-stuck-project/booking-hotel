@@ -5,12 +5,15 @@ const userController = {
   addUser: async (req, res) => {
     try {
       const { firstName, lastName, email, phone, password, role } = req.body;
+      console.log(firstName, lastName, email, phone, password, role);
 
       // Check if the email already exists
       const [checkResults] = await promisePool.query(
         "SELECT * FROM users WHERE email = ?",
         [email]
       );
+
+      console.log(checkResults);
 
       if (checkResults.length > 0) {
         return res.status(409).send("Email already exists");
@@ -28,7 +31,6 @@ const userController = {
 
       // Hash the password
       const hashedPassword = await hashP(password);
-
 
       // Insert the new user into the database
       await promisePool.query(

@@ -67,6 +67,9 @@
 .dark .bg2 {
   @apply bg-darkMode-bg text-darkMode-divText;
 }
+.dark .div4 {
+  @apply bg-darkMode-bg text-darkMode-divText;
+}
 
 .highlight {
   background-color: yellow;

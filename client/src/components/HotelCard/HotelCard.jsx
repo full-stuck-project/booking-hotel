@@ -84,7 +84,7 @@ export const HotelCard = ({
 
   return (
     <div className={isDarkMode ? "dark" : ""}>
-      <div className="w-[1200px] h-[300px] flex border-[1px] rounded-[20px] ml-20 mt-20 overflow-hidden">
+      <div className="w-[90%] h-[300px] flex border-[1px] rounded-[20px] ml-20 mt-20 overflow-hidden">
         {/* Image Section */}
         <div className="w-[400px] h-full">
           <img
@@ -108,8 +108,9 @@ export const HotelCard = ({
 
         {/* Price and Action Section */}
         <div className="flex justify-center items-center text-left flex-col w-[400px] h-full p-6">
+          <h1>Price per night</h1>
           <h1 className="text-4xl font-bold">${price}</h1>
-          <button className="mt-6 py-2 px-6 rounded-full shadow-md transition duration-300">
+          <button className="mt-6 py-2 px-6 rounded-full shadow-md transition duration-300 bg-orange-600 text-white">
             View Deal
           </button>
         </div>
