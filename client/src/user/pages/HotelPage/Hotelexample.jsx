@@ -117,7 +117,6 @@
 //     </div>
 //   );
 // };
-
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -164,11 +163,7 @@ export const Hotelexample = () => {
       <div className="h-full w-full flex flex-col bg">
         <SearchFilter />
         <div className="relative">
-          <AllFilter
-            setMinPrice={setMinPrice}
-            setHighPrice={setHighPrice}
-            handleSubmit={handleSubmit}
-          />
+          <AllFilter />
           <div className="w-full flex mt-4">
             <div className="h-full w-[50%]">
               {hotels.map((hotel) => (
@@ -189,7 +184,7 @@ export const Hotelexample = () => {
                 />
               ))}
             </div>
-            <div className="w-[50%] h-[500px]">
+            <div className="relative flex h-full w-[50%] justify-center items-center z-20">
               <Map />
             </div>
           </div>

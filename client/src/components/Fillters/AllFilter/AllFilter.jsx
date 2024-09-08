@@ -115,13 +115,6 @@ export const AllFilter = () => {
     setShowFillters(false);
   };
 
-  const handleSubmit = () => {
-    const filteredHotels = hotels.filter(
-      (hotel) => hotel.min_price >= minPrice && hotel.min_price <= highPrice
-    );
-    setHotels(filteredHotels);
-  };
-
   return (
     <div className={`${isDarkMode ? "dark" : ""} p-4 relative z-40`}>
       <div className="flex w-full justify-evenly py-4 rounded-lg div">
