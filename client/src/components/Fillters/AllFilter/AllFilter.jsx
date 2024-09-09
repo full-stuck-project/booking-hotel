@@ -88,6 +88,7 @@ import { PriceFilter } from "../PriceFillter/PriceFillter";
 import { Fillters } from "../Fillters/Fillters";
 import { RatingFillter } from "../RatingFillter/RatingFillter";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 export const AllFilter = () => {
   const [showPriceFilter, setShowPriceFilter] = useState(false);
@@ -134,7 +135,7 @@ export const AllFilter = () => {
                 setMinPrice={setMinPrice}
                 highPrice={highPrice}
                 setHighPrice={setHighPrice}
-                handleSubmit={handleSubmit}
+                // handleSubmit={handleSubmit}
               />
             </div>
           )}

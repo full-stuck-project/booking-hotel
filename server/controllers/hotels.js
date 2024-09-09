@@ -67,7 +67,7 @@ const hotelController = {
     `;
 
       // Query for room details
-     let roomsQuery = `
+      let roomsQuery = `
       SELECT r.id AS room_id, 
          r.price, 
          rt.capacity, 
@@ -82,7 +82,6 @@ const hotelController = {
   WHERE r.hotel_id = ? AND r.is_occupied = 'No'
   GROUP BY r.id, r.price, rt.capacity, rt.pension_type, rt.name, r.is_occupied;
 `;
-
 
       const [hotelRows] = await promisePool.query(hotelQuery, [hotelId]);
       const [reviewsRows] = await promisePool.query(reviewsQuery, [hotelId]);
