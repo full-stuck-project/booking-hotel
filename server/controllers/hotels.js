@@ -14,8 +14,10 @@ const hotelController = {
                c.name AS city, 
                GROUP_CONCAT(DISTINCT ha.name) AS hotel_amenities,
                GROUP_CONCAT(DISTINCT ra.name) AS room_amenities,
+               GROUP_CONCAT(DISTINCT i.image_url) AS images,
                MIN(r.price) AS min_price
         FROM hotels h
+        LEFT JOIN images i ON i.hotel_id = h.id
         LEFT JOIN cities c ON h.city_id = c.id
         LEFT JOIN hotel_amenities_usage hau ON h.id = hau.hotel_id
         LEFT JOIN hotel_amenities ha ON hau.amenity_id = ha.id

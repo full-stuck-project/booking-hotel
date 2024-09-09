@@ -339,7 +339,7 @@ export const HotelPage = () => {
   const { hotelId } = useParams();
   const location = useLocation();
   const { state } = location;
-  const { vacation, checkin, checkout, people } = state || {};
+  const { vacation, checkin, checkout, people,images } = state || {};
 
   const [hotelData, setHotelData] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -410,17 +410,17 @@ export const HotelPage = () => {
 
   const averageRatings = calculateAverageRatings(reviews);
 
-  const images = [
-    "../../../../img/image1.png",
-    "../../../../img/image2.png",
-    "../../../../img/image3.png",
-    "../../../../img/image4.png",
-    "../../../../img/image5.png",
-    "../../../../img/image6.png",
-    "../../../../img/image7.png",
-    "../../../../img/image8.png",
-    "../../../../img/image9.png",
-  ];
+  // const images = [
+  //   "../../../../img/image1.png",
+  //   "../../../../img/image2.png",
+  //   "../../../../img/image3.png",
+  //   "../../../../img/image4.png",
+  //   "../../../../img/image5.png",
+  //   "../../../../img/image6.png",
+  //   "../../../../img/image7.png",
+  //   "../../../../img/image8.png",
+  //   "../../../../img/image9.png",
+  // ];
 
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);

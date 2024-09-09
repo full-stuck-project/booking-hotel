@@ -86,9 +86,11 @@ export const HotelCard = ({
   checkin,
   checkout,
   people,
+  images
 }) => {
   const { isDarkMode } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  console.log(images);
 
   const handleViewDealClick = () => {
     // Navigate to HotelPage and pass hotelId
@@ -98,6 +100,7 @@ export const HotelCard = ({
         checkin,
         checkout,
         people,
+        images,
       },
     });
   };

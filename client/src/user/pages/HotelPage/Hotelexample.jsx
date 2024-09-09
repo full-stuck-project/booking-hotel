@@ -84,6 +84,9 @@ export const Hotelexample = () => {
   const people = queryParams.get("people");
   const vacation = queryParams.get("vacation");
 
+  // const hotel_imagesArray = hotels.images.split(",");
+  // console.log(hotel_imagesArray)
+
   // Function to fetch hotels based on country
   const fetchHotels = async (country) => {
     try {
@@ -92,6 +95,7 @@ export const Hotelexample = () => {
       });
       setHotels(response.data);
       setFilteredHotels(response.data);
+      console.log(response.data)
     } catch (error) {
       console.error("Error fetching hotels:", error);
     }
@@ -134,23 +138,27 @@ export const Hotelexample = () => {
           <AllFilter onPriceFilter={handlePriceFilter} />
           <div className="w-full flex mt-4">
             <div className="h-full w-[50%]">
-              {filteredHotels.map((hotel) => (
-                <HotelCard
-                  className="h-full"
-                  key={hotel.hotel_id}
-                  image="/img/small.jpg"
-                  name={hotel.hotel_name}
-                  amenities={hotel.hotel_amenities}
-                  description={`Located in ${hotel.city}, ${hotel.city_center} meters from the center and malls.`}
-                  rating={`${hotel.rating} Good`}
-                  price={hotel.min_price}
-                  hotelId={hotel.hotel_id}
-                  vacation={vacation}
-                  checkin={checkin}
-                  checkout={checkout}
-                  people={people}
-                />
-              ))}
+              {filteredHotels.map((hotel) => {
+                let arrImg = hotel.images.split(",");
+                return (
+                  <HotelCard
+                    className="h-full"
+                    key={hotel.hotel_id}
+                    image={arrImg[0]}
+                    name={hotel.hotel_name}
+                    amenities={hotel.hotel_amenities}
+                    description={`Located in ${hotel.city}, ${hotel.city_center} meters from the center and malls.`}
+                    rating={`${hotel.rating} Good`}
+                    price={hotel.min_price}
+                    hotelId={hotel.hotel_id}
+                    vacation={vacation}
+                    checkin={checkin}
+                    checkout={checkout}
+                    people={people}
+                    images={arrImg}
+                  />
+                );
+              })}
             </div>
             <div className="relative flex h-full w-[50%] justify-center items-center z-20">
               <Map />
