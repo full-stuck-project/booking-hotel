@@ -13,13 +13,13 @@ import { HotelPage } from "./user/pages/HotelPage/HotelPage";
 import { HotelCard } from "./components/HotelCard/HotelCard";
 import { Blog } from "./pages/Blog/Blog";
 import { PersonalDetailsPage } from "./user/pages/PersonalDetails/PersonalDetailsPage";
-import { TransactionPage } from "./user/pages/TransactionPage/TransactionPage";
 import { OrderConfirmationCard } from "./components/OrderConfirmationCard/OrderConfirmationCard";
 import { Rooms } from "./components/Rooms/Rooms";
 import { ExamplePage } from "./pages/ExamplePage";
 import Map from "./components/Map/Map";
 import { Hotelexample } from "./user/pages/HotelPage/Hotelexample";
 import { AllFilter } from "./components/Fillters/AllFilter/AllFilter";
+import { TransactionPage } from "./user/pages/TransactionPage/TransactionPage";
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
         <Route path="/ratingfilter" element={<RatingFillter />} />
         <Route path="/hotelpage" element={<HotelPage />} />
         <Route path="/hotelpage/:hotelId" element={<HotelPage />} />
-        <Route path="/personaldetails" element={<PersonalDetailsPage />} />
+        <Route path="/personaldetails/:hotelId" element={<PersonalDetailsPage />} />
         <Route path="/transactionpage" element={<TransactionPage />} />
         <Route path="/examplepage" element={<ExamplePage />} />
         <Route path="/map" element={<Map />} />

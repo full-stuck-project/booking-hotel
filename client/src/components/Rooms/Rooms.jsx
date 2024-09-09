@@ -182,6 +182,8 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 export const Rooms = ({
   ameneties,
@@ -192,12 +194,31 @@ export const Rooms = ({
   checkin,
   checkout,
   people,
+  hotelId,
+  hotelName
 }) => {
   const { isDarkMode } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const reserveClick = () => {
+    navigate(`/personaldetails/${hotelId}`, {
+      state: {
+        staying,
+        checkin,
+        checkout,
+        people,
+        hotelName,
+        roomType,
+        price,
+        roomAmeneties
+      },
+    });
+  };
 
   // Split the amenities string into an array
   const amenetiesList = roomAmeneties ? roomAmeneties.split(",") : [];
   let parts = ameneties.room_type.split(" - ");
+  const roomType = parts[0];
 
   return (
     <div className={`${isDarkMode ? "dark" : ""}`}>
@@ -239,7 +260,7 @@ export const Rooms = ({
               Price for one night
             </h1>
             <div className="mt-7">
-              <p className="text-lg font-bold">₪ {price}</p>
+              <p className="text-lg font-bold">$ {price}</p>
             </div>
           </div>
 
@@ -260,7 +281,10 @@ export const Rooms = ({
 
           {/* Select Room & Reserve Button */}
           <div className="pl-[1%] text-center">
-            <button className="bg-orange-400 hover:bg-orange-700 text-white p-2 rounded-lg w-full">
+            <button
+              onClick={reserveClick}
+              className="bg-orange-400 hover:bg-orange-700 text-white p-2 rounded-lg w-full"
+            >
               reserve
             </button>
             <p className="mt-2 text-sm text-gray-600">
