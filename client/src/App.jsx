@@ -1,5 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+
 import { Home } from "./pages/Home/Home";
 import { PriceFilter } from "./components/Fillters/PriceFillter/PriceFillter";
 import { Fillters } from "./components/Fillters/Fillters/Fillters";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/pricefilter" element={<PriceFilter />} />
         <Route path="/filters" element={<Fillters />} />
         <Route path="/ratingfilter" element={<RatingFillter />} />
+        <Route path="/hotelpage" element={<HotelPage />} />
         <Route path="/hotelpage/:hotelId" element={<HotelPage />} />
         <Route path="/personaldetails" element={<PersonalDetailsPage />} />
         <Route path="/transactionpage" element={<TransactionPage />} />
