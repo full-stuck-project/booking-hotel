@@ -68,9 +68,11 @@
 //     </div>
 //   );
 // };
-
+// hotelcard-import React from "react";
+// HotelCard.js
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const HotelCard = ({
   image,
@@ -79,12 +81,30 @@ export const HotelCard = ({
   description,
   rating,
   price,
+  hotelId, // Unique identifier for the hotel
+  vacation,
+  checkin,
+  checkout,
+  people
 }) => {
   const { isDarkMode } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const handleViewDealClick = () => {
+    // Navigate to HotelPage and pass hotelId
+      navigate(`/hotelpage/${hotelId}`, {
+        state: {
+          vacation,
+          checkin,
+          checkout,
+          people,
+        },
+      });
+  };
 
   return (
     <div className={isDarkMode ? "dark" : ""}>
-      <div className="w-[90%] h-[300px] flex border-[1px] rounded-[20px] ml-20 mt-20 overflow-hidden">
+      <div className="div w-[90%] h-[300px] flex border-[1px] rounded-[20px] ml-20 mt-20 overflow-hidden">
         {/* Image Section */}
         <div className="w-[400px] h-full">
           <img
@@ -98,10 +118,10 @@ export const HotelCard = ({
         <div className="flex items-start justify-between text-left flex-col w-[400px] h-full p-6">
           <h1 className="text-3xl font-semibold font-serif">{name}</h1>
           <p className="mt-2 font-medium">{description}</p>
-          <div className="mt-4 p-2 rounded-lg">
+          <div className="mt-2 p-2 rounded-lg">
             <p className="text-lg">{amenities}</p>
           </div>
-          <div className="mt-4 p-2 rounded-full">
+          <div className=" p-[2%] rounded-full">
             <p className="text-lg font-semibold">{rating}</p>
           </div>
         </div>
@@ -110,7 +130,10 @@ export const HotelCard = ({
         <div className="flex justify-center items-center text-left flex-col w-[400px] h-full p-6">
           <h1>Price per night</h1>
           <h1 className="text-4xl font-bold">${price}</h1>
-          <button className="mt-6 py-2 px-6 rounded-full shadow-md transition duration-300 bg-orange-600 text-white">
+          <button
+            onClick={handleViewDealClick}
+            className="mt-6 py-2 px-6 rounded-full shadow-md transition duration-300 bg-orange-600 text-white"
+          >
             View Deal
           </button>
         </div>

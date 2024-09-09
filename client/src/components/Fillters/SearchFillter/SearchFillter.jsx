@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export const SearchFilter = ({ className = "" }) => {
+  const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [country, setCountry] = useState("");
@@ -122,9 +125,11 @@ export const SearchFilter = ({ className = "" }) => {
       !formData.endDate ||
       formData.startDate === null
     ) {
-      alert(`Please fill out all fields`);
+      alert("Please fill out all fields");
     } else {
-      console.log(formData);
+      navigate(`/example2?country=${encodeURIComponent(formData.country)}&checkin=${encodeURIComponent(formData.startDate)}&checkout=${encodeURIComponent(formData.endDate)}&people=${formData.people}&vacation=${formData.vacationTime}`);
+
+
     }
   };
 

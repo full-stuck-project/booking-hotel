@@ -12,6 +12,10 @@
   @apply bg-lightMode-div text-lightMode-divText;
 }
 
+.nav {
+  @apply bg-gray-400  text-lightMode-divText;
+}
+
 .bg {
   @apply bg-lightMode-div text-lightMode-divText;
 }

@@ -7,32 +7,17 @@ export const Fillters = () => {
     <div className={`${isDarkMode ? "dark" : ""}`}>
       <div className="flex justify-center items-center div">
         <div className="bg-white shadow-lg rounded-lg w-full p-6 div ">
-          <strong className="block text-lg mb-4">Payment</strong>
-          <div className="flex flex-col mb-4">
-            <div className="flex items-center mb-2">
-              <input type="checkbox" className="mr-2" />
-              <p className="text-gray-600 h1">Free cancellation</p>
-            </div>
-            <div className="flex items-center mb-2">
-              <input type="checkbox" className="mr-2" />
-              <p className="text-gray-600 h1">Pay at the property</p>
-            </div>
-          </div>
-
           <strong className="block text-lg mb-4">Meal options</strong>
           <div className="flex flex-col mb-4">
             <div className="flex items-center mb-2">
               <input type="checkbox" className="mr-2" />
               <p className="text-gray-600 h1">Breakfast included</p>
             </div>
-            <div className="flex items-center mb-2">
-              <input type="checkbox" className="mr-2" />
-              <p className="text-gray-600 h1">All-inclusive</p>
-            </div>
+
             <div className="flex items-start mb-2">
               <input type="checkbox" className="mr-2" />
               <div>
-                <p className="text-gray-600 h1">Half board</p>
+                <p className="text-gray-600 h1">Half pansion</p>
                 <p className="text-gray-400 text-sm h1">
                   Breakfast and dinner included
                 </p>
@@ -41,7 +26,7 @@ export const Fillters = () => {
             <div className="flex items-start mb-4">
               <input type="checkbox" className="mr-2" />
               <div>
-                <p className="text-gray-600 h1">Full board</p>
+                <p className="text-gray-600 h1">Full pansion</p>
                 <p className="text-gray-400 text-sm h1">
                   Breakfast, lunch, and dinner included
                 </p>
