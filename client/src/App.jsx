@@ -44,7 +44,6 @@ function App() {
         <Route path="/example2" element={<Hotelexample />} />
         <Route path="/filt" element={<AllFilter />} />
 
-
         {/* <Route path="/footer" element={<Footer />} /> */}
       </Routes>
     </div>
@@ -98,8 +97,6 @@ export default App;
 //         <Route path="/map" element={<Map />} />
 //         <Route path="/example2" element={<Hotelexample />} />
 //         <Route path="/filt" element={<AllFilter />} />
-
-
 
 //         {/* <Route path="/footer" element={<Footer />} /> */}
 //       </Routes>

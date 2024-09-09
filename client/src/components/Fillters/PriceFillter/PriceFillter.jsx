@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
+
+const MAX_PRICE = 1000000; // Use a large number to represent "infinity"
 
 export const PriceFilter = ({
   minPrice,
@@ -12,7 +14,7 @@ export const PriceFilter = ({
 
   const handleReset = () => {
     setMinPrice(0);
-    setHighPrice(Infinity);
+    setHighPrice(MAX_PRICE);
   };
 
   return (
@@ -25,7 +27,10 @@ export const PriceFilter = ({
               <p className="text-gray-600 dark:text-white text-sm">Min price</p>
               <input
                 value={minPrice}
-                onChange={(e) => setMinPrice(Number(e.target.value))}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value >= 0 && value <= highPrice) setMinPrice(value);
+                }}
                 type="number"
                 className="text-lg font-semibold py-2 px-4 border border-gray-300 rounded-md text-center w-[80px] bg"
               />
@@ -34,8 +39,11 @@ export const PriceFilter = ({
             <div className="text-center">
               <p className="text-gray-600 dark:text-white text-sm">Max price</p>
               <input
-                value={highPrice}
-                onChange={(e) => setHighPrice(Number(e.target.value))}
+                value={highPrice === MAX_PRICE ? "" : highPrice}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value >= minPrice) setHighPrice(value);
+                }}
                 type="number"
                 className="text-lg font-semibold py-2 px-4 border border-gray-300 rounded-md text-center w-[80px] bg"
               />
@@ -47,7 +55,7 @@ export const PriceFilter = ({
           <div className="flex items-center justify-between mt-6">
             <button
               onClick={handleReset}
-              className="bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-white py-2 px-6 rounded-md"
+              className="bg-green-500 text-white py-2 px-6 rounded-md"
             >
               Reset
             </button>

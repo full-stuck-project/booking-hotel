@@ -85,21 +85,21 @@ export const HotelCard = ({
   vacation,
   checkin,
   checkout,
-  people
+  people,
 }) => {
   const { isDarkMode } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const handleViewDealClick = () => {
     // Navigate to HotelPage and pass hotelId
-      navigate(`/hotelpage/${hotelId}`, {
-        state: {
-          vacation,
-          checkin,
-          checkout,
-          people,
-        },
-      });
+    navigate(`/hotelpage/${hotelId}`, {
+      state: {
+        vacation,
+        checkin,
+        checkout,
+        people,
+      },
+    });
   };
 
   return (

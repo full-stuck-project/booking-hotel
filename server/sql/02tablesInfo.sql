@@ -252,4 +252,15 @@ WHERE name LIKE 'Standard Room%';
 
 
 --before inserting reviews create 4 personal users!!!!!!!
---create one business user before inserting its id!
+--create one business user before inserting its id! 
+
+
+
+-- CREATE TABLE IF NOT EXISTS images (
+--   id INT AUTO_INCREMENT PRIMARY KEY,
+--   hotel_id INT NOT NULL,
+--   image_url VARCHAR(255) NOT NULL,
+--   FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
+-- );
+
+

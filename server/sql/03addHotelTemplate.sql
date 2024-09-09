@@ -146,3 +146,34 @@ ALTER TABLE reviews
 ADD COLUMN country VARCHAR(100),
 ADD COLUMN room_type VARCHAR(255),
 ADD COLUMN stay_duration VARCHAR(255);
+
+INSERT INTO images (hotel_id, image_url) VALUES
+(1, '/hotelImg/hotel1/first1.jpg'),
+(1, '/hotelImg/hotel1/first2.jpg'),
+(1, '/hotelImg/hotel1/first3.jpg'),
+(1, '/hotelImg/hotel1/first4.jpg'),
+(1, '/hotelImg/hotel1/first5.jpg'),
+(1, '/hotelImg/hotel1/first6.jpg'),
+(1, '/hotelImg/hotel1/first7.jpg'),
+(1, '/hotelImg/hotel1/first8.jpg'),
+(1, '/hotelImg/hotel1/first9.jpg'),
+
+(2, '/hotelImg/hotel2/second1.jpg'),
+(2, '/hotelImg/hotel2/second2.jpg'),
+(2, '/hotelImg/hotel2/second3.jpg'),
+(2, '/hotelImg/hotel2/second4.jpg'),
+(2, '/hotelImg/hotel2/second5.jpg'),
+(2, '/hotelImg/hotel2/second6.jpg'),
+(2, '/hotelImg/hotel2/second7.jpg'),
+(2, '/hotelImg/hotel2/second8.jpg'),
+(2, '/hotelImg/hotel2/second9.jpg'),
+
+(3, '/hotelImg/hotel3/third1.jpg'),
+(3, '/hotelImg/hotel3/third2.jpg'),
+(3, '/hotelImg/hotel3/third3.jpg'),
+(3, '/hotelImg/hotel3/third4.jpg'),
+(3, '/hotelImg/hotel3/third5.jpg'),
+(3, '/hotelImg/hotel3/third6.jpg'),
+(3, '/hotelImg/hotel3/third7.jpg'),
+(3, '/hotelImg/hotel3/third8.jpg'),
+(3, '/hotelImg/hotel3/third9.jpg')

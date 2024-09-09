@@ -105,3 +105,5 @@ export const Footer = () => {
     </div>
   );
 };
+
+/// array = [/hotelsIng/hotel1/first1.jpg,/hotelsIng/hotel2/first1.jpg]
