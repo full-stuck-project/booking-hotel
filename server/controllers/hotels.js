@@ -6,10 +6,14 @@ const hotelController = {
     try {
       const { country } = req.query;
       console.log(`Received country filter: ${country}`);
+
+      // First query: Get hotel information
       let query = `
         SELECT h.id AS hotel_id, 
                h.name AS hotel_name, 
-               h.rating, 
+               h.rating,  
+               h.x, 
+               h.y, 
                h.city_center, 
                c.name AS city, 
                GROUP_CONCAT(DISTINCT ha.name) AS hotel_amenities,
@@ -27,11 +31,31 @@ const hotelController = {
         LEFT JOIN room_amenities ra ON rau.amenity_id = ra.id
         LEFT JOIN countries cn ON c.country_id = cn.id
         WHERE cn.name = ?
-        GROUP BY h.id, h.name, h.rating, h.city_center, c.name;
+        GROUP BY h.id, h.name, h.rating, h.city_center, c.name , c.name ,h.x, h.y;
       `;
 
-      const [rows] = await promisePool.query(query, [country].filter(Boolean));
-      res.json(rows);
+      let queryMap = `
+        SELECT c.latitude, 
+               c.longitude 
+        FROM countries c 
+        WHERE c.name = ?
+      `;
+
+      // Execute both queries
+      const [hotelRows] = await promisePool.query(
+        query,
+        [country].filter(Boolean)
+      );
+      const [mapRows] = await promisePool.query(
+        queryMap,
+        [country].filter(Boolean)
+      );
+
+      // Send the combined result in the response
+      res.json({
+        hotels: hotelRows,
+        mapCoordinates: mapRows.length > 0 ? mapRows[0] : null, // Send coordinates if available
+      });
     } catch (err) {
       console.error("Error fetching hotels:", err.stack);
       res.status(500).send("Internal Server Error");

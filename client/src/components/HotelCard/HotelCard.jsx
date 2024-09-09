@@ -81,12 +81,14 @@ export const HotelCard = ({
   description,
   rating,
   price,
-  hotelId, // Unique identifier for the hotel
+  hotelId,
   vacation,
   checkin,
   checkout,
   people,
-  images
+  images,
+  latitude,
+  longitude,
 }) => {
   const { isDarkMode } = useSelector((state) => state.user);
   const navigate = useNavigate();

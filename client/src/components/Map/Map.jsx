@@ -1,3 +1,46 @@
+// export default Map;
+
+// import React from "react";
+// import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+// import "leaflet/dist/leaflet.css";
+// import L from "leaflet";
+
+// delete L.Icon.Default.prototype._getIconUrl;
+// L.Icon.Default.mergeOptions({
+//   iconRetinaUrl:
+//     "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+//   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+//   shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+// });
+
+// const Map = ({ locations }) => {
+//   console.log("Map locations:", locations); // Check the data being passed
+
+//   // Default center and zoom level
+//   const defaultCenter = [39.8283, -98.5795];
+//   const zoomLevel = 4; // Adjust zoom level as needed
+
+//   return (
+//     <MapContainer center={defaultCenter} zoom={zoomLevel} className="h-[800px] w-[95%]">
+//       <TileLayer
+//         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+//         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+//       />
+//       {locations && locations.length > 0 ? (
+//         locations.map((location) => (
+//           <Marker key={location.id} position={[location.position[1], location.position[0]]}>
+//             <Popup>{location.name}</Popup>
+//           </Marker>
+//         ))
+//       ) : (
+//         <p>No locations available</p>
+//       )}
+//     </MapContainer>
+//   );
+// };
+
+// export default Map;
+
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -11,41 +54,37 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
 });
 
-const locations = [
-  { id: 1, name: "Miami Hotel", position: [25.7617, -80.1918] },
-  { id: 2, name: "NYC Hotel", position: [40.7128, -74.006] },
-  { id: 3, name: "California Hotel", position: [36.7783, -119.4179] },
-  { id: 4, name: "Texas Hotel", position: [31.9686, -99.9018] },
-];
+const Map = ({ locations }) => {
+  console.log("Map locations:", locations); // Check the data being passed
 
-const Map = () => {
-  const defaultCenter = [39.8283, -98.5795]; // Center the map on the USA
+  // Default center and zoom level
+  const defaultCenter = [39.8283, -98.5795];
+  const zoomLevel = 4; // Adjust zoom level as needed
 
   return (
     <MapContainer
       center={defaultCenter}
-      zoom={4}
-      className="h-[800px] w-[95%]" // Adjust height as needed
+      zoom={zoomLevel}
+      className="h-[800px] w-[95%]"
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {locations.map((location) => (
-        <Marker key={location.id} position={location.position}>
-          <Popup>{location.name}</Popup>
-        </Marker>
-      ))}
+      {locations && locations.length > 0 ? (
+        locations.map((location) => (
+          <Marker
+            key={location.id}
+            position={[location.position[1], location.position[0]]}
+          >
+            <Popup>{location.name}</Popup>
+          </Marker>
+        ))
+      ) : (
+        <p>No locations available</p>
+      )}
     </MapContainer>
   );
 };
 
 export default Map;
-
-/* 
-
-cordinates of hotel 
-cordinates of country 
-name of hotel 
-id of hotel 
-*/

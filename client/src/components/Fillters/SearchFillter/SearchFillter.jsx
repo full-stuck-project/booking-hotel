@@ -127,9 +127,15 @@ export const SearchFilter = ({ className = "" }) => {
     ) {
       alert("Please fill out all fields");
     } else {
-      navigate(`/example2?country=${encodeURIComponent(formData.country)}&checkin=${encodeURIComponent(formData.startDate)}&checkout=${encodeURIComponent(formData.endDate)}&people=${formData.people}&vacation=${formData.vacationTime}`);
-
-
+      navigate(
+        `/example2?country=${encodeURIComponent(
+          formData.country
+        )}&checkin=${encodeURIComponent(
+          formData.startDate
+        )}&checkout=${encodeURIComponent(formData.endDate)}&people=${
+          formData.people
+        }&vacation=${formData.vacationTime}`
+      );
     }
   };
 

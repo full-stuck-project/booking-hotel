@@ -330,7 +330,6 @@ import { useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
-
 import { Rooms } from "../../../components/Rooms/Rooms";
 
 export const HotelPage = () => {
@@ -338,11 +337,11 @@ export const HotelPage = () => {
   const { hotelId } = useParams();
   const location = useLocation();
   const { state } = location;
-  const { vacation, checkin, checkout, people,images } = state || {};
+  const { vacation, checkin, checkout, people, images } = state || {};
 
   const [hotelData, setHotelData] = useState(null);
   const [reviews, setReviews] = useState([]);
-    const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isReviewOpen, setIsReviewOpen] = useState(false);
