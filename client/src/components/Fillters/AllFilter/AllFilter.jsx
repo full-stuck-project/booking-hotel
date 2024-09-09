@@ -10,7 +10,6 @@
 //   const [showRatingFilter, setShowRatingFilter] = useState(false);
 //   const { isDarkMode } = useSelector((state) => state.user);
 
-//   // Toggle functions for each filter
 //   const togglePriceFilter = () => {
 //     setShowPriceFilter((prev) => !prev);
 //     setShowFillters(false);
@@ -30,8 +29,8 @@
 //   };
 
 //   return (
-//     <div className={`${isDarkMode ? "dark" : ""} p-4`}>
-//       <div className="flex w-full  justify-evenly py-4 rounded-lg div">
+//     <div className={`${isDarkMode ? "dark" : ""} p-4 relative z-40`}>
+//       <div className="flex w-full justify-evenly py-4 rounded-lg div">
 //         {/* Price Filter */}
 //         <div className="flex flex-col items-center w-[30%] relative">
 //           <strong className="text-lg">Price</strong>
@@ -42,7 +41,7 @@
 //             Price
 //           </button>
 //           {showPriceFilter && (
-//             <div className="absolute top-full mt-2 w-full z-10">
+//             <div className="absolute top-full mt-2 w-full z-50">
 //               <PriceFilter />
 //             </div>
 //           )}
@@ -58,7 +57,7 @@
 //             Filter
 //           </button>
 //           {showFillters && (
-//             <div className="absolute top-full mt-2 w-full z-10">
+//             <div className="absolute top-full mt-2 w-[75%] z-50">
 //               <Fillters />
 //             </div>
 //           )}
@@ -74,7 +73,7 @@
 //             Select
 //           </button>
 //           {showRatingFilter && (
-//             <div className="absolute top-full mt-2 w-full z-10">
+//             <div className="absolute top-full mt-2 w-full z-50">
 //               <RatingFillter />
 //             </div>
 //           )}
@@ -94,6 +93,8 @@ export const AllFilter = () => {
   const [showPriceFilter, setShowPriceFilter] = useState(false);
   const [showFillters, setShowFillters] = useState(false);
   const [showRatingFilter, setShowRatingFilter] = useState(false);
+  const [minPrice, setMinPrice] = useState(0);
+  const [highPrice, setHighPrice] = useState(Infinity);
   const { isDarkMode } = useSelector((state) => state.user);
 
   const togglePriceFilter = () => {
@@ -128,7 +129,13 @@ export const AllFilter = () => {
           </button>
           {showPriceFilter && (
             <div className="absolute top-full mt-2 w-full z-50">
-              <PriceFilter />
+              <PriceFilter
+                minPrice={minPrice}
+                setMinPrice={setMinPrice}
+                highPrice={highPrice}
+                setHighPrice={setHighPrice}
+                handleSubmit={handleSubmit}
+              />
             </div>
           )}
         </div>
@@ -143,7 +150,7 @@ export const AllFilter = () => {
             Filter
           </button>
           {showFillters && (
-            <div className="absolute top-full mt-2 w-full z-50">
+            <div className="absolute top-full mt-2 w-[75%] z-50">
               <Fillters />
             </div>
           )}

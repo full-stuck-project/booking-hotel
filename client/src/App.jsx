@@ -37,6 +37,7 @@ function App() {
         <Route path="/filters" element={<Fillters />} />
         <Route path="/ratingfilter" element={<RatingFillter />} />
         <Route path="/hotelpage" element={<HotelPage />} />
+        <Route path="/hotelpage/:hotelId" element={<HotelPage />} />
         <Route path="/personaldetails" element={<PersonalDetailsPage />} />
         <Route path="/transactionpage" element={<TransactionPage />} />
         <Route path="/examplepage" element={<ExamplePage />} />

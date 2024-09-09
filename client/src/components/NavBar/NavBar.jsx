@@ -352,7 +352,7 @@ const NavBar = () => {
 
   return (
     <div className={isDarkMode ? "dark" : ""}>
-      <nav className="div flex items-center justify-between shadow-black shadow-sm text-6b6a68 h-16 w-full px-6 relative">
+      <nav className="div flex items-center justify-between shadow-black shadow-sm text-6b6a68 h-16 w-full px-6 relative nav">
         <div className="flex items-center">
           <img src="/img/logo.jpg" alt="Logo" className="w-20 h-20 mr-4" />
           <label>Search:</label>
@@ -462,11 +462,16 @@ const NavBar = () => {
               className="hover:text-gray-200"
             >
               <div className="h-10 w-10 bg-gray-100 rounded-full border-2 border-black flex items-center justify-center">
-                {/* <img src={profile} alt="Profile" className="h-7 rounded-full" /> */}
+                <img
+                  src="/img/user.jpg"
+                  alt="Profile"
+                  className="h-7 rounded-full"
+                />
               </div>
             </button>
+
             {isProfileOpen && (
-              <div className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg z-20">
+              <div className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg z-20 bg-white">
                 <ul>
                   <li className="href px-4 py-2 cursor-pointer">Profile</li>
                   <li className="href px-4 py-2 cursor-pointer">Settings</li>
