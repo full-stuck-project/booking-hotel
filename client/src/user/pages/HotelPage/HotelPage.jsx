@@ -327,9 +327,8 @@
 // };
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 
 
 import { Rooms } from "../../../components/Rooms/Rooms";
@@ -527,32 +526,33 @@ export const HotelPage = () => {
                 Show All Reviews
               </button>
             </div>
-{/* Rooms Section */}
-<div className="rooms mt-8">
-  <h2 className="text-xl font-bold mb-4">Available Rooms</h2>
-  <div className="flex flex-col">
-    {rooms.length > 0 ? (
-      rooms
-        .filter((room) => room.capacity >= people)
-        .map((room) => (
-          <Rooms
-            key={room.room_id}
-            ameneties={room}
-            price={room.price}
-            roomAmeneties={room.room_amenities}
-            capacity={room.capacity}
-            staying={vacation}
-            checkin={checkin}
-            checkout={checkout}
-            people={people}
-          />
-        ))
-    ) : (
-      <p>No rooms available.</p>
-    )}
-  </div>
-</div>
-
+            {/* Rooms Section */}
+            <div className="rooms mt-8">
+              <h2 className="text-xl font-bold mb-4">Available Rooms</h2>
+              <div className="flex flex-col">
+                {rooms.length > 0 ? (
+                  rooms
+                    .filter((room) => room.capacity >= people)
+                    .map((room) => (
+                      <Rooms
+                        key={room.room_id}
+                        ameneties={room}
+                        price={room.price}
+                        roomAmeneties={room.room_amenities}
+                        capacity={room.capacity}
+                        staying={vacation}
+                        checkin={checkin}
+                        checkout={checkout}
+                        people={people}
+                        hotelId={hotelId}
+                        hotelName={hotel_name}
+                      />
+                    ))
+                ) : (
+                  <p>No rooms available.</p>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
