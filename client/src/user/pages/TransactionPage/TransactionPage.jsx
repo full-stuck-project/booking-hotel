@@ -4,6 +4,7 @@
 // import { useLocation, useNavigate } from "react-router-dom";
 
 
+
 // export const TransactionPage = () => {
 //   const { isDarkMode } = useSelector((state) => state.user);
 
@@ -138,6 +139,7 @@
 //               <div className="space-y-4">
 //                 {/* Cardholder's Name */}
 //                 <div>
+
 //                   <input
 //                     type="text"
 //                     placeholder="Cardholder's Name"
@@ -210,7 +212,10 @@
 
 
 
-import { useState } from "react";
+
+
+
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { FaCreditCard } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
@@ -238,6 +243,31 @@ export const TransactionPage = () => {
   const [cvc, setCvc] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("payLater");
   const [errors, setErrors] = useState({});
+
+  const paypalContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (paymentMethod === "payNow") {
+      const script = document.createElement("script");
+      script.src =
+        "https://www.paypal.com/sdk/js?client-id=BAAaZsk8Xj3gQRwVdhOnUDLkUZ1JM2sRQUvGk_uMK_eby7u5sAPOj4fuWncLrm-eQxrXhuML7m4vPvRzIY&components=hosted-buttons&disable-funding=venmo&currency=ILS";
+      script.onload = () => {
+        if (window.paypal && paypalContainerRef.current) {
+          window.paypal
+            .HostedButtons({
+              hostedButtonId: "9UJA2ZVLS7QYS",
+            })
+            .render(paypalContainerRef.current);
+        }
+      };
+      document.body.appendChild(script);
+
+      // Cleanup script on component unmount
+      return () => {
+        document.body.removeChild(script);
+      };
+    }
+  }, [paymentMethod]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -288,6 +318,7 @@ export const TransactionPage = () => {
   const lengthOfStay = differenceInDays(checkoutDate, checkinDate);
 
   return (
+
     <div className={`${isDarkMode ? "dark:bg-gray-800" : "bg-white"}`}>
       <div className="max-w-4xl mx-auto p-10">
         <div className="border rounded-lg shadow-lg p-8 space-y-6">
@@ -311,8 +342,10 @@ export const TransactionPage = () => {
                   </li>
                 ))}
               </ul>
+
+   
+
             </div>
-          </div>
 
           {/* Booking Details */}
           <div className="border-b pb-6">
@@ -339,36 +372,17 @@ export const TransactionPage = () => {
             </p>
           </div>
 
-          {/* Payment Options */}
-          <div className="border-b pb-6">
-            <h3 className="font-semibold text-xl">
-              When would you like to pay?
-            </h3>
-            <div className="flex items-center space-x-6 mt-3">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="payLater"
-                  checked={paymentMethod === "payLater"}
-                  onChange={() => setPaymentMethod("payLater")}
-                  className="mr-2"
-                />
-                Pay later
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="payNow"
-                  checked={paymentMethod === "payNow"}
-                  onChange={() => setPaymentMethod("payNow")}
-                  className="mr-2"
-                />
-                Pay now
-              </label>
+
+            {/* Price Summary */}
+            <div className="border-b pb-6">
+              <h3 className="font-semibold text-xl">Your price summary</h3>
+              <p className="mt-2">
+                Total: <strong>₪3,930.44</strong> (Includes taxes and charges)
+              </p>
+              <p>
+                Damage deposit (Fully refundable): <strong>₪200</strong>
+              </p>
             </div>
-          </div>
 
           {/* Payment Method */}
           <form onSubmit={handleSubmit}>
@@ -379,32 +393,30 @@ export const TransactionPage = () => {
               <div className="space-y-4">
                 {/* Cardholder's Name */}
                 <div>
-                  <input
-                    type="text"
-                    placeholder="Cardholder's Name"
-                    className="border p-3 w-full rounded-md"
-                    value={cardholderName}
-                    onChange={(e) => setCardholderName(e.target.value)}
-                  />
-                  {errors.cardholderName && (
-                    <p className="text-red-500">{errors.cardholderName}</p>
-                  )}
-                </div>
 
-                {/* Card Number */}
-                <div className="relative">
-                  <FaCreditCard className="absolute left-3 top-3 text-gray-500" />
                   <input
-                    type="text"
-                    placeholder="Card Number"
-                    className="border p-3 pl-10 w-full rounded-md"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
+                    type="radio"
+                    name="payment"
+                    value="payLater"
+                    checked={paymentMethod === "payLater"}
+                    onChange={() => setPaymentMethod("payLater")}
+                    className="mr-2"
                   />
-                  {errors.cardNumber && (
-                    <p className="text-red-500">{errors.cardNumber}</p>
-                  )}
-                </div>
+                  Pay later
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="payNow"
+                    checked={paymentMethod === "payNow"}
+                    onChange={() => setPaymentMethod("payNow")}
+                    className="mr-2"
+                  />
+                  Pay now
+                </label>
+              </div>
+            </div>
 
                 {/* Expiry Date & CVC */}
                 <div className="flex space-x-4">
@@ -429,20 +441,18 @@ export const TransactionPage = () => {
                       onChange={(e) => setCvc(e.target.value)}
                     />
                     {errors.cvc && <p className="text-red-500">{errors.cvc}</p>}
+
+      
                   </div>
+                </form>
+
+                {/* PayPal Button */}
+                <div className="mt-6">
+                  <div ref={paypalContainerRef} />
                 </div>
               </div>
-            </div>
-
-            <div className="mt-6">
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Pay Now
-              </button>
-            </div>
-          </form>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ export const Fillters = () => {
             <div className="flex items-start mb-2">
               <input type="checkbox" className="mr-2" />
               <div>
-                <p className="text-gray-600 h1">Half pansion</p>
+                <p className="text-gray-600 h1">Half Board</p>
                 <p className="text-gray-400 text-sm h1">
                   Breakfast and dinner included
                 </p>
@@ -26,7 +26,7 @@ export const Fillters = () => {
             <div className="flex items-start mb-4">
               <input type="checkbox" className="mr-2" />
               <div>
-                <p className="text-gray-600 h1">Full pansion</p>
+                <p className="text-gray-600 h1">Full Board</p>
                 <p className="text-gray-400 text-sm h1">
                   Breakfast, lunch, and dinner included
                 </p>
@@ -59,14 +59,6 @@ export const Fillters = () => {
             <div className="flex items-center mb-2">
               <input type="checkbox" className="mr-2" />
               <p className="text-gray-600 h1">Air conditioning</p>
-            </div>
-            <div className="flex items-center mb-2">
-              <input type="checkbox" className="mr-2" />
-              <p className="text-gray-600 h1">Kitchen</p>
-            </div>
-            <div className="flex items-center mb-2">
-              <input type="checkbox" className="mr-2" />
-              <p className="text-gray-600 h1">Non-smoking rooms</p>
             </div>
           </div>
 
