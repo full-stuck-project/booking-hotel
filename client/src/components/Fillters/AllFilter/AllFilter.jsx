@@ -230,7 +230,7 @@ export const AllFilter = ({ onPriceFilter }) => {
             Price
           </button>
           {showPriceFilter && (
-            <div className="absolute top-full mt-2 w-full z-50">
+            <div className="absolute top-full mt-2 w-full z-50 ">
               <PriceFilter
                 minPrice={minPrice}
                 setMinPrice={setMinPrice}
@@ -242,8 +242,7 @@ export const AllFilter = ({ onPriceFilter }) => {
           )}
         </div>
 
-        {/* General Filter */}
-        <div className="flex flex-col items-center w-[30%] relative">
+        {/* <div className="flex flex-col items-center w-[30%] relative">
           <strong className="text-lg">Filter</strong>
           <button
             onClick={toggleFillters}
@@ -258,7 +257,6 @@ export const AllFilter = ({ onPriceFilter }) => {
           )}
         </div>
 
-        {/* Rating Filter */}
         <div className="flex flex-col items-center w-[30%] relative">
           <strong className="text-lg">Rating</strong>
           <button
@@ -272,7 +270,7 @@ export const AllFilter = ({ onPriceFilter }) => {
               <RatingFillter />
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

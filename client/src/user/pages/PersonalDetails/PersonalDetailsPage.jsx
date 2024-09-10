@@ -196,20 +196,6 @@
 //   );
 // };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import { useState } from "react";
 // import { useSelector } from "react-redux";
 // import DatePicker from 'react-datepicker'; // Example for date picker
@@ -223,7 +209,6 @@
 //   const location = useLocation();
 //   const { state } = location;
 //   const { staying, checkin, checkout, people, hotelName, roomType} = state || {};
-
 
 //   const [formData, setFormData] = useState({
 //     firstName: "",
@@ -453,11 +438,6 @@
 //     </div>
 //   );
 // };
-
-
-
-
-
 
 // import { useState } from "react";
 // import { useSelector } from "react-redux";
@@ -734,8 +714,6 @@
 //   );
 // };
 
-
-
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import DatePicker from "react-datepicker"; // Import DatePicker
@@ -820,6 +798,10 @@ export const PersonalDetailsPage = () => {
         roomType,
         roomAmeneties,
         totalPrice,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        phone: formData.phone,
+        email: formData.email,
       },
     });
   };

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { FaCreditCard } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import { format, parseISO, differenceInDays } from "date-fns";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const TransactionPage = () => {
   const { isDarkMode } = useSelector((state) => state.user);
@@ -18,6 +19,10 @@ export const TransactionPage = () => {
     roomType,
     roomAmeneties,
     totalPrice,
+    firstName,
+    lastName,
+    phone,
+    email,
   } = state || {};
 
   const [cardholderName, setCardholderName] = useState("");
@@ -26,6 +31,7 @@ export const TransactionPage = () => {
   const [cvc, setCvc] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("payLater");
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const paypalContainerRef = useRef(null);
 
@@ -80,7 +86,23 @@ export const TransactionPage = () => {
       };
 
       console.log("Form data:", formData);
-      alert("Payment submitted successfully!");
+      navigate(`/confirm`, {
+        state: {
+          staying,
+          checkin,
+          checkout,
+          people,
+          hotelName,
+          roomType,
+          roomAmeneties,
+          totalPrice,
+          firstName,
+          lastName,
+          phone,
+          email,
+        },
+      });
+      // alert("Payment submitted successfully!");
     }
   };
 
@@ -247,6 +269,7 @@ export const TransactionPage = () => {
               {/* Submit Button */}
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="mt-6 bg-orange-500 text-white p-3 rounded-md w-full"
               >
                 Confirm Payment
@@ -254,11 +277,11 @@ export const TransactionPage = () => {
             </form>
 
             {/* PayPal Button */}
-            {paymentMethod === "payNow" && (
+            {/* {paymentMethod === "payNow" && (
               <div className="mt-6">
                 <div ref={paypalContainerRef} />
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

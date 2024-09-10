@@ -173,7 +173,7 @@ export const Home = () => {
     "/img/thailand.jpg",
     "/img/istanbul.jpg",
     "/img/barcelona.jpg",
-    "/img/dubai.jpg",
+    // "/img/dubai.jpg",
   ];
 
   const recommendations = [
